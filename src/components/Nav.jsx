@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 
 function Nav() {
-  const [profilePic, setProfilePic] = useState("");
   const user = useSelector((state) => state.user.user);
-
   const navigation = useNavigate();
   function navigateLogin() {
     navigation("/login");
@@ -31,7 +29,7 @@ function Nav() {
           </>
         ) : (
           <div className="profile-icon" onClick={navigateProfile}>
-            <img src={profilePic !== "" ? profilePic : "/images/profile.png"} />
+            <img src={user.profilePic !== "" ? user.profilePic : "/images/profile.png"} />
           </div>
         )}
       </div>

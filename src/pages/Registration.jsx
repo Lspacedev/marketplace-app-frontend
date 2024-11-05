@@ -6,6 +6,11 @@ function Registration() {
     username: "",
     email: "",
     password: "",
+    street: "",
+    town: "",
+    city: "",
+    country: "",
+    profilePic: ""
   });
 
   //navigation
@@ -22,29 +27,34 @@ function Registration() {
   }
 
   function handleImageUpload(e) {
-    let input = document.getElementById("profile-pic");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      setUserDetails({
+    setUserDetails({
         ...userDetails,
-        profilePic: event.target.result,
+        profilePic: e.target.files[0],
       });
-    };
+    
   }
 
   async function handleSubmit() {
+    const formData = new FormData();
+    formData.append("username", userDetails.username);
+    formData.append("email", userDetails.email);
+    formData.append("password", userDetails.password);
+    formData.append("street", userDetails.street);
+    formData.append("town", userDetails.town);
+    formData.append("city", userDetails.city);
+    formData.append("country", userDetails.country);
+    formData.append("profilePic", userDetails.profilePic);
     try {
-      const res = await fetch(`http://localhost:3000/register`, {
+      const res = await fetch(`http://localhost:3000/api/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userDetails),
+        body: formData,
       });
-      const data = res.json();
-      alert(data.message);
-      navigation("/login");
+      if (res.ok) {
+        const data = await res.json();
+        alert(data.message);
+        navigation("/login");
+      } 
+     
     } catch (error) {
       console.log(error);
     }
@@ -83,6 +93,48 @@ function Registration() {
               />
             </label>
           </div>
+          <div className="address">
+            <label htmlFor="street">
+              Street name:
+              <input
+                type="text"
+                id="street"
+                name="street"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.street}
+              />
+            </label>
+            <label htmlFor="town">
+              Town:
+              <input
+                type="text"
+                id="town"
+                name="town"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.town}
+              />
+            </label>
+            <label htmlFor="city">
+              City:
+              <input
+                type="text"
+                id="city"
+                name="city"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.city}
+              />
+            </label>
+            <label htmlFor="country">
+              Country:
+              <input
+                type="text"
+                id="country"
+                name="country"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.country}
+              />
+            </label>
+          </div>
 
           <div className="password">
             <label htmlFor="password">
@@ -97,7 +149,7 @@ function Registration() {
             </label>
           </div>
 
-          {/* <div className="profile-pic">
+          <div className="profile-pic">
             <label htmlFor="profile-pic">
               Profile picture:
               <input
@@ -107,7 +159,7 @@ function Registration() {
                 onChange={(e) => handleImageUpload(e)}
               />
             </label>
-          </div> */}
+          </div>
 
           <button onClick={() => handleSubmit()}>Submit</button>
         </div>

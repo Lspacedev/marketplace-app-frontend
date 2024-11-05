@@ -401,3 +401,177 @@ select {
 .connect-links > a:hover {
   text-decoration: underline;
 }
+
+.HomePage {
+  height: 100vh;
+  display: flex;
+  width: 100vw;
+}
+
+.Main {
+  flex: 8;
+  height: inherit;
+  width: calc(100% - 355px);
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.DashboardNav {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 45px;
+
+  box-shadow: 1px 0px 5px #bbb;
+  padding-right: 150px;
+}
+.DashboardNav p {
+  cursor: pointer;
+}
+.DashboardNav div {
+  cursor: pointer;
+}
+.Sidebar {
+  flex: 2;
+  width: 30%;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  padding: 50px 5px;
+  background-color: #626267;
+}
+.Sidebar .logo {
+  color: #a6a670;
+}
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+
+  color: #36363a;
+}
+.logout {
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-links {
+  flex: 90%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.sidebar-links div {
+  cursor: pointer;
+  margin: 0px 25px;
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-links div:hover {
+  background-color: #a6a670;
+  border-radius: 2px;
+}
+
+/*Products*/
+.Products {
+  height: calc(100% - 100px);
+  width: 100%;
+}
+
+.Products .products-div {
+  height: 100%;
+
+  margin: 0px;
+  padding: 25px;
+
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.Products .item {
+  width: 250px;
+  height: 200px;
+  margin: 5px 0px;
+
+  word-wrap: break-word;
+  background-color: white;
+}
+.ProductCard {
+  height: 100%;
+
+  box-shadow: 2px 2px 5px #bbb;
+}
+.ProductCard .img {
+  height: 70%;
+  background-color: gray;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.ProductCard .img img {
+  height: 100%;
+  width: 100%;
+}
+.Product .slides {
+  height: 400px;
+  width: 45vw;
+  margin: 0px auto;
+  position: relative;
+  display: flex;
+
+  /* Add the following lines for smooth scrolling */
+  scroll-behavior: smooth;
+  transition: scroll 0.3s ease-in-out;
+}
+.currentSlide {
+  width: inherit;
+}
+.slides img {
+  width: inherit;
+  height: 100%;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 5px;
+  color: white;
+
+  font-size: 2rem;
+  border: none;
+  background-color: transparent;
+  border: 1px solid #a6a670;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: #36363a;
+}
+
+.items-div {
+  display: flex;
+  justify-content: space-around;
+}

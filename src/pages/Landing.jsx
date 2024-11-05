@@ -3,6 +3,7 @@ import ShowCase from "../components/Showcase";
 import Categories from "../components/Categories";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
+import { Outlet } from "react-router-dom";
 
 function Landing() {
   return (
@@ -14,7 +15,7 @@ function Landing() {
       </Categories>
 
       <Categories heading="Popular"></Categories>
-
+      <Outlet />
       <Footer />
     </div>
   );

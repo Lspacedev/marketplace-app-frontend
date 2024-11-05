@@ -12,7 +12,7 @@ function Nav() {
     navigation("/register");
   }
   function navigateProfile() {
-    navigation("/home/profile");
+    navigation("/home");
   }
   return (
     <div className="Nav">
@@ -29,7 +29,11 @@ function Nav() {
           </>
         ) : (
           <div className="profile-icon" onClick={navigateProfile}>
-            <img src={user.profilePic !== "" ? user.profilePic : "/images/profile.png"} />
+            <img
+              src={
+                user.profilePic !== "" ? user.profilePic : "/images/profile.png"
+              }
+            />
           </div>
         )}
       </div>

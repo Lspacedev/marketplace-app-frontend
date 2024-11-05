@@ -36,18 +36,24 @@ function HomePage() {
   function navigateProducts() {
     navigation("/home/products");
   }
-  //   function navigateReservations() {
-  //     navigation("/home/reservations");
-
+  function navigateOrders() {
+    navigation("/home/orders");
+  }
+  function logOut() {
+    localStorage.clear();
+    navigation("/");
+  }
   return (
     <div className="HomePage">
       <Sidebar>
         <div onClick={navigateProducts}>Products</div>
-        <div>Orders</div>
+        <div onClick={navigateOrders}>Orders</div>
 
         <div>Reviews</div>
 
-        <div className="logout">Logout</div>
+        <div className="logout" onClick={logOut}>
+          Logout
+        </div>
       </Sidebar>
       <div className="Main">
         <DashboardNav />

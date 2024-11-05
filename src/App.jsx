@@ -12,6 +12,10 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import MarketPlace from "./pages/MarketPlace";
 import Item from "./pages/Item";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
+import Orders from "./pages/Orders";
+import UserProfile from "./pages/UserProfile";
 function App() {
   const dispatch = useDispatch();
 
@@ -53,7 +57,6 @@ function App() {
           <Route exact path="login" element={<Login />} />
 
           <Route element={<ProtectedRoute />}>
-            <Route path="checkout" element={<Checkout />} />
             <Route path="success" element={<Success />} />
             <Route path="cancel" element={<Cancel />} />
           </Route>
@@ -63,12 +66,10 @@ function App() {
               <Route path="products" element={<Products />}>
                 <Route path=":product_id" element={<Product />} />
               </Route>
-              {/* <Route index element={<Bookings />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path="reviews" element={<Reviews />} />
-              <Route path="favourites" element={<Favourites />} />
+              <Route path="orders" element={<Orders />} />
+              {/* <Route path="reviews" element={<Reviews />} /> */}
 
-              <Route path="profile" element={<UserProfile userId={user} />} /> */}
+              <Route path="profile" element={<UserProfile />} />
             </Route>
           </Route>
         </Routes>

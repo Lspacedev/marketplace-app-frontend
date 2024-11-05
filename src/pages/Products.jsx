@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
@@ -11,6 +11,7 @@ function Products() {
   const { product_id } = useParams();
   const navigation = useNavigate();
   const dispatch = useDispatch();
+
   const token = localStorage.getItem("token");
   const products = useSelector((state) => state.products.products);
 
@@ -19,7 +20,7 @@ function Products() {
   }, []);
   async function fetchProducts() {
     try {
-      const res = await fetch(`http://localhost:3000/api/products?page=${6}`, {
+      const res = await fetch(`http://localhost:3000/api/products`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -36,19 +37,7 @@ function Products() {
       console.log(error);
     }
   }
-  //   useEffect(() => {
-  //     if (submittedSearch.length > 0) {
-  //       let filteredRecipes = recipes.filter(
-  //         (recipe) =>
-  //           recipe.name.toLowerCase().match(submittedSearch.toLowerCase()) ||
-  //           recipe.category.toLowerCase().match(submittedSearch.toLowerCase())
-  //       );
-  //       setSearchResults(filteredRecipes);
-  //     }
-  //     return () => {
-  //       setSearchResults([]);
-  //     };
-  //   }, [submittedSearch]);
+
   function handleNavigateProduct(id) {
     navigation(`/home/products/${id}`);
   }

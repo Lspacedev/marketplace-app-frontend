@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setPublicProducts } from "../app/publicSlice";
+
 function MarketPlace() {
   const [searchResults, setSearchResults] = useState([]);
   const { item_id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
   useEffect(() => {
     fetchPublicProducts();
   }, []);
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
+  const searchT = useSelector((state) => state.public.searchTerm?.title) || "";
+  const submittedSearch =
+    useSelector((state) => state.public.submittedSearch?.title) || "";
   const publicProducts = useSelector((state) => state.public.publicProducts);
   const token = localStorage.getItem("token");
 
@@ -43,20 +49,20 @@ function MarketPlace() {
   function handleNavigatePublicProduct(id) {
     navigation(`/marketplace/${id}`);
   }
-  //   useEffect(() => {
-  //     if (submittedSearch.length > 0) {
-  //       let filteredRecipes = recipes.filter(
-  //         (recipe) =>
-  //           recipe.name.toLowerCase().match(submittedSearch.toLowerCase()) ||
-  //           recipe.category.toLowerCase().match(submittedSearch.toLowerCase())
-  //       );
-  //       setSearchResults(filteredRecipes);
-  //     }
-  //     return () => {
-  //       setSearchResults([]);
-  //     };
-  //   }, [submittedSearch]);
-  console.log(publicProducts);
+  useEffect(() => {
+    console.log(searchTerm, publicProducts);
+    if (searchTerm.length > 0) {
+      console.log("val");
+      let filteredProducts = publicProducts.filter((product) =>
+        product.name.toLowerCase().match(searchTerm.toLowerCase())
+      );
+      console.log({ filteredProducts });
+      setSearchResults(filteredProducts);
+    }
+    return () => {
+      setSearchResults([]);
+    };
+  }, [searchTerm]);
   return (
     <div className="MarketPlace">
       {item_id !== "" && typeof item_id !== "undefined" ? (

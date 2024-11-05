@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import publicReducer from "./publicSlice";
 import productsReducer from "./productsSlice";
+import reviewsReducer from "./reviewsSlice";
 import userReducer from "./userSlice";
 
 export default configureStore({
@@ -8,5 +9,6 @@ export default configureStore({
     public: publicReducer,
     products: productsReducer,
     user: userReducer,
+    reviews: reviewsReducer,
   },
 });

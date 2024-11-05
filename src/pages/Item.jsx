@@ -7,6 +7,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { setPublicProduct } from "../app/publicSlice";
+import getStripe from "../../lib/getStripe";
+
 function Item() {
   useEffect(() => {
     fetchProduct();
@@ -49,8 +51,64 @@ function Item() {
       console.log(error);
     }
   }
+
+  async function buyProduct() {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/public/products/${item_id}/buy`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Length": 0,
+            Authorization: `Bearer ${token}`,
+          },
+          body: {},
+        }
+      );
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+
+      if (response.ok === true) {
+        let quantity = Number(product.price);
+        handleCheckout(quantity);
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
   function handleNavigateBack() {
     navigation(`/`);
+  }
+  async function handleCheckout(qty) {
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [
+        {
+          price: import.meta.env.VITE_NEXT_PUBLIC_STRIPE_PRICE_ID,
+          quantity: qty,
+        },
+      ],
+      mode: "payment",
+      successUrl: `http://localhost:5173/success`,
+      cancelUrl: `http://localhost:5173/cancel`,
+      customerEmail: "customer@email.com",
+    });
+    console.warn(error.message);
+  }
+  async function buy() {
+    let buyConfirmation = window.confirm(
+      "You are about to buy this item. You'll be taken to a payment gateway. Continue?"
+    );
+    if (buyConfirmation) {
+      try {
+        buyProduct();
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
   return (
     <div className="Item">

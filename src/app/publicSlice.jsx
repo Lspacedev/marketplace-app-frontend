@@ -7,6 +7,7 @@ export const publicSlice = createSlice({
     publicProduct: {},
     searchResults: [],
     searchTerm: "",
+    submitSearch: "",
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -21,6 +22,9 @@ export const publicSlice = createSlice({
     setPublicProduct: (state, action) => {
       state.publicProduct = action.payload;
     },
+    setSubmitSearch: (state, action) => {
+      state.submitSearch = action.payload;
+    },
   },
 });
 export const {
@@ -28,6 +32,7 @@ export const {
   setPublicProduct,
   setSearchResults,
   setSearchTerm,
+  setSubmitSearch,
 } = publicSlice.actions;
 
 export default publicSlice.reducer;

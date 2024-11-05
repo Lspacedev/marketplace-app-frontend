@@ -309,13 +309,13 @@ select {
 
 /* Footer */
 .footer-logo {
-  color: #a6a670;
+  color: #f1dabf;
   font-size: 1.2rem;
   font-weight: 700;
 }
 .footer {
   color: white;
-  background-color: #36363a;
+  background-color: #141414;
 
   font-family: "Ubuntu";
 
@@ -440,16 +440,16 @@ select {
 
   text-align: center;
   padding: 50px 5px;
-  background-color: #626267;
+  background-color: #141414;
 }
 .Sidebar .logo {
-  color: #a6a670;
+  color: #f1dabf;
 }
 .logo {
   font-size: 1.3rem;
   font-weight: bold;
 
-  color: #36363a;
+  color: #141414;
 }
 .logout {
   cursor: pointer;
@@ -570,8 +570,74 @@ select {
 .next:hover {
   background-color: #36363a;
 }
-
+.MarketPlace {
+  height: 50%;
+}
 .items-div {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.MarketPlace .items-div .item {
+  width: 200px;
+  height: 250px;
+  border-radius: 25px;
+}
+
+.MarketPlace .ProductCard {
+  height: 100%;
+
+  box-shadow: 2px 2px 5px #bbb;
+  border-radius: 25px;
+}
+.MarketPlace .ProductCard .img {
+  height: 70%;
+  background-color: gray;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.MarketPlace .ProductCard .img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+}
+
+.Add-div {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+}
+
+.Add-div button {
+  padding: 10px 30px;
+  background-color: #756859;
+  border: none;
+  color: white;
+  margin-right: 15px;
+  border-radius: 7px;
+}
+.Add-div button p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.Add-div button:hover {
+  background-color: #f1dabf;
+}
+#add-btn-long-text {
+  padding: 0px;
+  margin: 0px;
+}
+#add-btn-short {
+  display: none;
+}
+.cat-add {
+  display: flex;
+  justify-content: end;
 }

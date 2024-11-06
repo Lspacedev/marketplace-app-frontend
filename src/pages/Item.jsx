@@ -114,38 +114,39 @@ function Item() {
     <div className="Item">
       <BackArrow handleNavigate={handleNavigateBack} />
       <div className="product-content">
+        <div className="product-gallery">
+          <div className="slides" ref={slidesRef}>
+            {JSON.stringify(product) !== "{}" &&
+              product?.images.map((image, i) => {
+                return (
+                  <div
+                    className={
+                      i === activeImageNum
+                        ? "currentSlide active"
+                        : "currentSlide"
+                    }
+                    key={i}
+                  >
+                    {i === activeImageNum && <img src={image} />}
+                  </div>
+                );
+              })}
+            <button className="prev" onClick={prevSlide}>
+              <IoIosArrowBack />
+            </button>
+            <button className="next" onClick={nextSlide}>
+              <IoIosArrowForward />
+            </button>
+          </div>
+        </div>
         <div className="product-info">
-          <div className="product-gallery">
-            <div className="slides" ref={slidesRef}>
-              {JSON.stringify(product) !== "{}" &&
-                product?.images.map((image, i) => {
-                  return (
-                    <div
-                      className={
-                        i === activeImageNum
-                          ? "currentSlide active"
-                          : "currentSlide"
-                      }
-                      key={i}
-                    >
-                      {i === activeImageNum && <img src={image} />}
-                    </div>
-                  );
-                })}
-              <button className="prev" onClick={prevSlide}>
-                <IoIosArrowBack />
-              </button>
-              <button className="next" onClick={nextSlide}>
-                <IoIosArrowForward />
-              </button>
-            </div>
+          <div>{product && product.name}</div>
+
+          <div>
+            <h4>Price</h4>R{product && product.price}
           </div>
-          <div className="product-info">
-            <h1>{product && product.name}</h1>
-            <h1>R{product && product.price}</h1>
-            <h1>{product && product.description}</h1>
-            <button onClick={buy}>Buy Now</button>
-          </div>
+          <div>{product && product.description}</div>
+          <button onClick={buy}>Buy Now</button>
         </div>
       </div>
     </div>

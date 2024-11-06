@@ -12,6 +12,8 @@ function Landing() {
       <ShowCase />
       <Categories heading="Categories">
         <Card title="Tech" />
+        <Card title="Clothing" />
+        <Card title="Outdoors" />
       </Categories>
 
       <Categories heading="Popular"></Categories>

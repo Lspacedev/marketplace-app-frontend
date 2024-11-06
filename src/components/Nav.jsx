@@ -16,7 +16,9 @@ function Nav() {
   }
   return (
     <div className="Nav">
-      <div className="logo">Tribe.com</div>
+      <div className="logo">
+        <span>T</span>Tribe.com
+      </div>
       <div className="nav-links">
         <div>Discover</div>
         {JSON.stringify(user) === "{}" ? (

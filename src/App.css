@@ -18,6 +18,7 @@ button {
 .Nav {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 400px;
   padding: 15px 50px;
   background-color: white;
@@ -38,10 +39,10 @@ button {
 }
 
 .nav-links .register-btn {
-  background-color: #a6a670;
+  background-color: #141414;
   padding: 10px 25px;
   color: white;
-  border-radius: 5px;
+  border-radius: 25px;
   border: none;
 }
 
@@ -85,13 +86,53 @@ button {
 
 .ShowCase h3 {
   position: absolute;
-  top: 200px;
+  top: 120px;
   left: 50%;
   transform: translate(-50%, 0%);
   width: 70%;
   font-size: 2.5rem;
   color: white;
   text-align: center;
+}
+.SearchProducts {
+  position: absolute;
+  bottom: 100px;
+  width: 35%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  padding: 0px;
+  background-color: white;
+
+  border-radius: 25px;
+  z-index: 2;
+}
+
+.SearchProducts input {
+  flex: 3;
+  padding: 5px 0px;
+  border-radius: 25px 0px 0px 25px;
+  border: none;
+
+  text-align: center;
+}
+
+.SearchProducts input[type="submit"] {
+  flex: 1;
+  height: 100%;
+  padding: 5px 32px;
+
+  border-radius: 0px 25px 25px 0px;
+  background-color: #141414;
+  color: white;
+  font-weight: 700;
+}
+.SearchProducts input[type="submit"]:hover {
+  background-color: #626267;
+  cursor: pointer;
 }
 
 .profile-pic img {
@@ -112,12 +153,12 @@ button {
 }
 
 .login-to-register p {
-  color: #bc412b;
+  color: #141414;
   cursor: pointer;
 }
 
 .login-to-register p:hover {
-  color: #ed6a5a;
+  color: #36363a;
 }
 
 .login-form-container {
@@ -159,7 +200,7 @@ select {
 .Login button {
   margin: 5px 0px;
   width: 100%;
-  background-color: #bc412b;
+  background-color: #141414;
   color: white;
   outline: none;
   border: none;
@@ -167,7 +208,7 @@ select {
 }
 
 .Login button:hover {
-  background-color: #ed6a5a;
+  background-color: #36363a;
 }
 
 .login-img {
@@ -190,13 +231,13 @@ select {
   display: flex;
 }
 .register-to-login p {
-  color: #bc412b;
+  color: #141414;
   margin: 0px 5px;
   cursor: pointer;
 }
 
 .register-to-login p:hover {
-  color: #ed6a5a;
+  color: #36363a;
 }
 
 .register-form-container {
@@ -451,6 +492,10 @@ select {
 
   color: #141414;
 }
+.logo span {
+  background-color: #141414;
+  color: white;
+}
 .logout {
   cursor: pointer;
   font-size: 1.1rem;
@@ -477,7 +522,8 @@ select {
   justify-content: center;
 }
 .sidebar-links div:hover {
-  background-color: #a6a670;
+  background-color: white;
+  color: #141414;
   border-radius: 2px;
 }
 
@@ -570,6 +616,26 @@ select {
 .next:hover {
   background-color: #36363a;
 }
+
+.Categories .cards {
+  display: flex;
+  justify-content: space-evenly;
+}
+.Categories .heading {
+  text-align: center;
+  font-weight: 500;
+}
+.Card {
+  background-color: whitesmoke;
+  color: #141414;
+  padding: 15px;
+  border-radius: 25px;
+}
+.Card:hover {
+  background-color: #e4e4e4;
+  color: #626267;
+  cursor: pointer;
+}
 .MarketPlace {
   height: 50%;
 }
@@ -640,4 +706,83 @@ select {
 .cat-add {
   display: flex;
   justify-content: end;
+}
+.Item .slides {
+  flex: 1;
+  height: 400px;
+  width: 45vw;
+  margin: 0px auto;
+  position: relative;
+  display: flex;
+
+  /* Add the following lines for smooth scrolling */
+  scroll-behavior: smooth;
+  transition: scroll 0.3s ease-in-out;
+}
+.currentSlide {
+  width: inherit;
+}
+.slides img {
+  width: inherit;
+  height: 100%;
+}
+
+.product-content {
+  display: flex;
+  gap: 15px;
+  padding: 25px;
+}
+.Item .product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.Item .product-info button {
+  background-color: #36363a;
+  border: none;
+  color: white;
+  width: 100%;
+}
+.Item .product-info h4 {
+  margin: 0;
+  padding: 0;
+}
+.Item .product-info p {
+  margin: 0;
+  padding: 0;
+  color: #36363a;
+}
+.UserProfile {
+  flex: 85%;
+  height: calc(100% - 101px);
+  padding: 20px 25px;
+  overflow-y: scroll;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.profile-pic {
+  width: 291px;
+}
+.profile-pic img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.account-update button {
+  width: 30%;
+  background-color: #474037;
+  border: none;
+  color: white;
+}
+
+.close {
+  background-color: white;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  text-align: end;
 }

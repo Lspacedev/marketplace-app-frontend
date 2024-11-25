@@ -16,10 +16,13 @@ function Landing() {
         <Card title="Outdoors" />
       </Categories>
 
-      <Categories heading="Popular"></Categories>
+      {/* <Categories heading="Popular"></Categories> */}
       <Outlet />
       <Footer />
+      <div className="Cart">dd</div>
+
     </div>
+
   );
 }
 export default Landing;

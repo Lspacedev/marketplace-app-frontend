@@ -16,6 +16,7 @@ import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
+import Reviews from "./pages/Reviews"
 function App() {
   const dispatch = useDispatch();
 
@@ -67,7 +68,7 @@ function App() {
                 <Route path=":product_id" element={<Product />} />
               </Route>
               <Route path="orders" element={<Orders />} />
-              {/* <Route path="reviews" element={<Reviews />} /> */}
+              <Route path="reviews" element={<Reviews />} />
 
               <Route path="profile" element={<UserProfile />} />
             </Route>

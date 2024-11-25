@@ -145,6 +145,8 @@ function Item() {
           <div>
             <h4>Price</h4>R{product && product.price}
           </div>
+          <div>{product && product.category}</div>
+
           <div>{product && product.description}</div>
           <button onClick={buy}>Buy Now</button>
         </div>

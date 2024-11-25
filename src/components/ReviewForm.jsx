@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useSelector } from "react-redux";
 
 function ReviewForm({ toggleClicked }) {
@@ -20,24 +20,24 @@ function ReviewForm({ toggleClicked }) {
       "You are about to add a review. Continue?"
     );
     if (reviewConfirmation) {
-      //   try {
-      //     const response = await fetch(
-      //       `http://localhost:3000/api/public/reviews/${item_id}`,
-      //       {
-      //         method: "GET",
-      //         headers: {
-      //           "Content-Type": "application/json",
-      //           Authorization: `Bearer ${token}`,
-      //         },
-      //       }
-      //     );
-      //     const data = await response.json();
-      //     if (response.ok === true) {
-      //       dispatch(setPublicProduct(data));
-      //     }
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/public/reviews`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(obj)
+            }
+          );
+          const data = await response.json();
+          if (response.ok === true) {
+          }
+        } catch (error) {
+          console.log(error);
+        }
       toggleClicked();
     }
   }
@@ -47,9 +47,7 @@ function ReviewForm({ toggleClicked }) {
   }
 
   const user = useSelector((state) => state.user.user);
-  useEffect(() => {
-    fetchReviews();
-  }, []);
+ 
 
   const purchasedProducts = user.purchasedProducts;
 
@@ -70,14 +68,14 @@ function ReviewForm({ toggleClicked }) {
               <select
                 name="seller"
                 onChange={(e) => handleChange(e)}
-                value={obj.seller}
+                value={obj.value}
               >
                 <option></option>
                 {typeof purchasedProducts !== "undefined" &&
                   purchasedProducts.length > 0 &&
                   purchasedProducts.map((product, i) => (
-                    <option key={i} value={product._id}>
-                      {product._id}
+                    <option key={i} value={product.seller}>
+                      {product.seller}
                     </option>
                   ))}
               </select>

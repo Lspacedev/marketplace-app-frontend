@@ -63,6 +63,27 @@ function MarketPlace() {
       setSearchResults([]);
     };
   }, [searchTerm]);
+  async function addToCart(id) {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({productId: id})
+        }
+      );
+console.log(res)
+      if (res.ok === true) {
+       
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="MarketPlace">
       {item_id !== "" && typeof item_id !== "undefined" ? (
@@ -86,6 +107,7 @@ function MarketPlace() {
                   handleNavigate={handleNavigatePublicProduct}
                   product={product}
                 />
+                <button onClick={()=>addToCart(product.id)}>Add to cart</button>
               </div>
             ))
           ) : (

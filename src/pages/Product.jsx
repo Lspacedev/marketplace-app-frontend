@@ -9,8 +9,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
 function Product() {
+  const product = useSelector((state) => state.products?.product);
+
   const [obj, setObj] = useState({
-    name: "",
+    name: product.name,
     price: "",
     description: "",
     location: "",
@@ -21,7 +23,6 @@ function Product() {
   useEffect(() => {
     fetchProduct();
   }, []);
-  const product = useSelector((state) => state.products?.product);
   const slidesRef = useRef(null);
   const [activeImageNum, setCurrent] = useState(0);
   const length = product?.images?.length;
@@ -310,9 +311,9 @@ function Product() {
               </div>
             </div>
             <div className="product-info">
-              <h1>{product && product.name}</h1>
-              <h1>R{product && product.price}</h1>
-              <h1>{product && product.description}</h1>
+              <div>{product && product.name}</div>
+              <div>R{product && product.price}</div>
+              <div>{product && product.description}</div>
             </div>
           </div>
         )}

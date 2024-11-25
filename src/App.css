@@ -278,14 +278,14 @@ select {
 .Registration button {
   margin: 5px 0px;
   width: 100%;
-  background-color: #bc412b;
+  background-color: #141414;
   color: white;
   outline: none;
   border: none;
   cursor: pointer;
 }
 .Registration button:hover {
-  background-color: #ed6a5a;
+  background-color: #36363a;
 }
 .register-img {
   flex: 50%;
@@ -311,16 +311,16 @@ select {
 
 .login-btn {
   font-size: 1.2rem;
-  color: #bc412b;
+  color: #141414;
   background-color: white;
   border: none;
   border-radius: 2px;
 }
 .login-btn:hover {
-  color: #ed6a5a;
+  color: #36363a;
 }
 .register-btn {
-  background-color: #bc412b;
+  background-color: #141414;
   color: white;
   font-weight: bold;
   padding: 12px 5px;
@@ -331,7 +331,7 @@ select {
 }
 
 .register-btn2 {
-  background-color: #bc412b;
+  background-color: #141414;
   color: white;
   font-weight: bold;
   padding: 20px 30px;
@@ -341,11 +341,11 @@ select {
 }
 
 .register-btn:hover {
-  background-color: #ed6a5a;
+  background-color: #36363a;
 }
 
 .register-btn2:hover {
-  background-color: #ed6a5a;
+  background-color: #36363a;
 }
 
 /* Footer */
@@ -544,6 +544,7 @@ select {
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .Products .item {
   width: 250px;
   height: 200px;
@@ -554,8 +555,15 @@ select {
 }
 .ProductCard {
   height: 100%;
-
+  padding: 15px;
   box-shadow: 2px 2px 5px #bbb;
+  border-radius: 25px;
+  
+}
+
+.ProductCard .product-info p {
+  margin: 0px;
+  padding: 0px
 }
 .ProductCard .img {
   height: 70%;
@@ -564,6 +572,7 @@ select {
   position: relative;
   cursor: pointer;
 }
+
 
 .ProductCard .img img {
   height: 100%;
@@ -624,12 +633,15 @@ select {
 .Categories .heading {
   text-align: center;
   font-weight: 500;
+  margin: 25px;
 }
 .Card {
   background-color: whitesmoke;
   color: #141414;
   padding: 15px;
+  margin: 15px;
   border-radius: 25px;
+
 }
 .Card:hover {
   background-color: #e4e4e4;
@@ -707,6 +719,7 @@ select {
   display: flex;
   justify-content: end;
 }
+
 .Item .slides {
   flex: 1;
   height: 400px;
@@ -727,10 +740,10 @@ select {
   height: 100%;
 }
 
-.product-content {
+.Item .product-content {
   display: flex;
   gap: 15px;
-  padding: 25px;
+  padding: 15px 250px;
 }
 .Item .product-info {
   flex: 1;
@@ -785,4 +798,184 @@ select {
   margin: 0px;
   border: none;
   text-align: end;
+}
+
+.ProductForm {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.ProductForm .form-div .form {
+  margin: 0 auto 0 auto;
+  padding: 25px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+} 
+
+.ProductForm .form input {
+  margin: 0px 0px;
+  padding: 5px 0px;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  
+  
+}
+
+.ProductForm .form label {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+
+
+.form-div .form {
+  margin: 0 auto 0 auto;
+  padding: 25px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+}
+
+.name,
+.price,
+.description,
+.location {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 0px;
+  margin: 5px 0px;
+} 
+
+.delete-update {
+  display: flex;
+  justify-content: center;
+  gap: 25px
+}
+.delete-update button {
+  width: 30%;
+}
+
+.Product .product-info {
+  text-align: center;
+
+}
+
+/* .update-form {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+
+
+.update-form {
+  margin: 0 auto 0 auto;
+  padding: 25px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+} 
+
+.update-form input {
+  margin: 0px 0px;
+  padding: 5px 0px;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  
+  
+}
+
+.update-form label {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+
+
+.update-form {
+  margin: 0 auto 0 auto;
+  padding: 25px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+.Cart {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: whitesmoke; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.Cart .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.Cart.active {
+
+  border: none;
+}
+
+.Cart.active {
+  width: 250px;
 }

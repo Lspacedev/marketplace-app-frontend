@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ProductForm({ toggleClicked }) {
   const [obj, setObj] = useState({
     productName: "",
     price: "",
+    category: "",
     description: "",
     location: "",
     condition: "",
@@ -13,6 +15,7 @@ function ProductForm({ toggleClicked }) {
   });
   const [tag, setTag] = useState("");
   const [images, setImages] = useState([]);
+  const user = useSelector((state) => state.user.user);
 
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
@@ -42,6 +45,7 @@ function ProductForm({ toggleClicked }) {
     const formData = new FormData();
     formData.append("name", obj.productName);
     formData.append("price", obj.price);
+    formData.append("category", obj.category);
     formData.append("description", obj.description);
     formData.append("location", obj.location);
     formData.append("condition", obj.condition);
@@ -121,6 +125,21 @@ function ProductForm({ toggleClicked }) {
               />
             </label>
           </div>
+          <div className="category">
+            <label htmlFor="category">
+              category
+              <select
+                name="category"
+                onChange={handleDropdownChange}
+                value={obj.value}
+              >
+                <option value=""></option>
+                <option value="tech">Tech</option>
+                <option value="clothing">Clothing</option>
+                <option value="outdoors">Outdoors</option>
+              </select>
+            </label>
+          </div>
 
           <div className="description">
             <label htmlFor="description">
@@ -137,13 +156,14 @@ function ProductForm({ toggleClicked }) {
           <div className="location">
             <label htmlFor="location">
               location
+              
               <select
                 name="location"
                 onChange={handleDropdownChange}
                 value={obj.value}
               >
-                <option value="sa"></option>
-                <option value="sa">sa</option>
+                <option value=""></option>
+                <option value={`${user.city}`}>{user.city}</option>
               </select>
             </label>
           </div>

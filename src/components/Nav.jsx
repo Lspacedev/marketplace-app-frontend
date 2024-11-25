@@ -14,11 +14,16 @@ function Nav() {
   function navigateProfile() {
     navigation("/home");
   }
+  function openSearchMenu() {
+    const search = document.querySelector(".Cart");
+    search.classList.toggle("active");
+  }
   return (
     <div className="Nav">
       <div className="logo">
         <span>T</span>Tribe.com
       </div>
+      <div onClick={openSearchMenu}>cart</div>
       <div className="nav-links">
         <div>Discover</div>
         {JSON.stringify(user) === "{}" ? (

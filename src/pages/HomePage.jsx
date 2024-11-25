@@ -39,15 +39,23 @@ function HomePage() {
   function navigateOrders() {
     navigation("/home/orders");
   }
+  function navigateReviews() {
+    navigation("/home/reviews");
+  }
   function logOut() {
     localStorage.clear();
     navigation("/");
   }
+  function closeSearchMenu() {
+    const search = document.querySelector(".Cart");
+    search.classList.toggle("active");
+}
   return (
     <div className="HomePage">
       <Sidebar>
         <div onClick={navigateProducts}>Products</div>
         <div onClick={navigateOrders}>Orders</div>
+        <div onClick={navigateReviews}>Reviews</div>
 
         <div>Reviews</div>
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function DashboardNav() {
   const navigation = useNavigate();
@@ -8,6 +9,7 @@ function DashboardNav() {
     navigation("/home/profile");
   }
   const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.user.user);
 
   async function becomeSeller() {
     try {
@@ -23,6 +25,7 @@ function DashboardNav() {
       const data = await response.json();
       console.log(data);
       if (response.ok === true) {
+        navigation(0);
       } else {
         alert(data.error);
       }
@@ -32,9 +35,19 @@ function DashboardNav() {
   }
   return (
     <div className="DashboardNav">
-      <div onClick={becomeSeller}>Become seller</div>
+      <div className="discover" onClick={() => navigation("/")}>
+        Discover
+      </div>
+
+      {user && user.role && user.role !== "SELLER" ? (
+        <div onClick={becomeSeller}>Become seller</div>
+      ) : (
+        <div onClick={() => alert("Already a seller")}>SELLER</div>
+      )}
       <div className="profile-icon" onClick={navigateProfile}>
-        <img src="/images/profile.png" />
+        <img
+          src={user.profilePic !== "" ? user.profilePic : "/images/profile.png"}
+        />
       </div>
     </div>
   );

@@ -14,21 +14,17 @@ function Reviews() {
   }, []);
   const reviews = useSelector((state) => state.reviews.reviews);
 
-  const purchasedProducts = user.purchasedProducts;
-
   async function fetchReviews() {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/api/public/reviews`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:3000/api/public/reviews`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
+      console.log({ data });
       if (response.ok === true) {
         dispatch(setReviews(data.reviews));
       }
@@ -37,13 +33,20 @@ function Reviews() {
     }
   }
 
+  console.log({ reviews });
   return (
     <div className="Reviews">
-      {user.purchasedProducts.length>0 && <AddReview />}
+      {user && user.purchasedProducts && user.purchasedProducts.length > 0 && (
+        <AddReview />
+      )}
       <div className="reviews-div">
-        {typeof reviews !== "undefined" &&
-          reviews.length > 0 ?
-          reviews.map((review, i) => <ReviewCard key={i} review={review} />): <div>No reviews found</div>}
+        {typeof reviews !== "undefined" && reviews.length > 0 ? (
+          reviews.map((review, i) => <ReviewCard key={i} review={review} />)
+        ) : (
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            No reviews found
+          </div>
+        )}
       </div>
     </div>
   );

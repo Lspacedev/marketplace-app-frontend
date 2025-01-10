@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../app/userSlice";
+import { useNavigate } from "react-router-dom";
+import { CgClose } from "react-icons/cg";
 
 function UserProfile({ userId }) {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const navigation = useNavigate();
 
   const [userUpdate, setUserUpdate] = useState({
     username: "",
@@ -13,10 +16,15 @@ function UserProfile({ userId }) {
   });
   const [profilePic, setProfilePic] = useState("");
   const [update, setUpdate] = useState(false);
-
-  const isLoading = false;
-
   const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    if (typeof user !== "undefined") {
+      setLoading(false);
+      setUserUpdate((prev) => ({ ...prev, username: user.username }));
+      setUserUpdate((prev) => ({ ...prev, email: user.email }));
+    }
+  }, [user]);
 
   function handleChange(e) {
     e.preventDefault();
@@ -27,6 +35,7 @@ function UserProfile({ userId }) {
 
   async function handleSubmit() {
     try {
+      setLoading(true);
       const res = await fetch(`http://localhost:3000/api/profile`, {
         method: "PUT",
         headers: {
@@ -38,14 +47,18 @@ function UserProfile({ userId }) {
       const data = await res.json();
       if (res.ok === true) {
         dispatch(setUser(data));
+        setLoading(false);
+
+        navigation(0);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
   return (
     <div className="UserProfile">
-      {isLoading === true ? (
+      {loading === true ? (
         <div>Loading...</div>
       ) : (
         <div className="contact-details">
@@ -53,14 +66,18 @@ function UserProfile({ userId }) {
             {update ? (
               <div className="profile-pic2">
                 <button className="close" onClick={() => setUpdate(false)}>
-                  x
+                  <CgClose />
                 </button>
               </div>
             ) : (
               <div className="profile-pic">
                 {
                   <img
-                    src={profilePic !== "" ? profilePic : "/images/profile.png"}
+                    src={
+                      user.profilePic !== ""
+                        ? user.profilePic
+                        : "/images/profile.png"
+                    }
                   />
                 }
               </div>
@@ -107,9 +124,9 @@ function UserProfile({ userId }) {
 
             <div className="user-pass">
               <div className="pass">
-                <h4>Password:</h4>
                 {update ? (
                   <div>
+                    <h4>New password:</h4>
                     <div className="password">
                       <input
                         type="password"
@@ -121,7 +138,7 @@ function UserProfile({ userId }) {
                     </div>
                   </div>
                 ) : (
-                  <div className="password-text">{user && user.password}</div>
+                  <div className="password-text"></div>
                 )}
               </div>
             </div>

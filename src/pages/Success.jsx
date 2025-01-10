@@ -12,7 +12,9 @@ function Success() {
     <div className="Success">
       <div>
         Payment successful
-        <div onClick={navigateHome}>Go back to Zahotels.com</div>
+        <div className="link" onClick={navigateHome}>
+          Go back to Marketplace
+        </div>
       </div>
     </div>
   );

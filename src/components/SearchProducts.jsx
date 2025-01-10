@@ -30,9 +30,6 @@ function SearchProducts() {
     e.preventDefault();
     setSearchParams({ search: searchInput });
     dispatch(setSearchTerm({ title: searchInput }));
-
-    // dispatch(setGuests({ num: guests }));
-    // navigation("/results");
   }
 
   return (
@@ -43,7 +40,7 @@ function SearchProducts() {
         onChange={handleSearchChange}
       />
 
-      <input type="submit" onClick={handleSearchSubmit} />
+      <input type="submit" value="Search" onClick={handleSearchSubmit} />
     </div>
   );
 }

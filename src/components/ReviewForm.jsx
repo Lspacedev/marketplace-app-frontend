@@ -1,5 +1,6 @@
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { CgClose } from "react-icons/cg";
 
 function ReviewForm({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -7,6 +8,8 @@ function ReviewForm({ toggleClicked }) {
     rating: "",
     reviewText: "",
   });
+  const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
 
   function handleChange(e) {
     e.preventDefault();
@@ -16,29 +19,37 @@ function ReviewForm({ toggleClicked }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     let reviewConfirmation = window.confirm(
       "You are about to add a review. Continue?"
     );
     if (reviewConfirmation) {
-        try {
-          const response = await fetch(
-            `http://localhost:3000/api/public/reviews`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify(obj)
-            }
-          );
-          const data = await response.json();
-          if (response.ok === true) {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/public/reviews`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(obj),
           }
-        } catch (error) {
-          console.log(error);
+        );
+        const data = await response.json();
+        if (response.ok === true) {
+          console.log({ data });
         }
-      toggleClicked();
+        toggleClicked();
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        toggleClicked();
+
+        setLoading(false);
+      }
     }
   }
 
@@ -47,16 +58,16 @@ function ReviewForm({ toggleClicked }) {
   }
 
   const user = useSelector((state) => state.user.user);
- 
 
   const purchasedProducts = user.purchasedProducts;
+  if (loading) return <div style={{ textAlign: "center" }}>Loading...</div>;
 
   return (
     <div className="ReviewForm">
       <div className="form-div">
         <div className="form-title-close">
           <div className="form-close" onClick={handleFormClose}>
-            x
+            <CgClose />
           </div>
         </div>
         <form>
@@ -89,6 +100,8 @@ function ReviewForm({ toggleClicked }) {
                 type="number"
                 id="rating"
                 name="rating"
+                min="1"
+                max="5"
                 onChange={(e) => handleChange(e)}
                 value={obj.rating}
               />
@@ -99,8 +112,10 @@ function ReviewForm({ toggleClicked }) {
             <label htmlFor="reviewText">
               Write a short review
               <input
+                type="text"
                 id="reviewText"
                 name="reviewText"
+                maxLength="100"
                 onChange={(e) => handleChange(e)}
                 value={obj.reviewText}
               />
@@ -110,7 +125,7 @@ function ReviewForm({ toggleClicked }) {
           <input
             id="task-add-submit"
             type="submit"
-            value="submit"
+            value="Submit"
             onClick={handleSubmit}
           ></input>
         </form>

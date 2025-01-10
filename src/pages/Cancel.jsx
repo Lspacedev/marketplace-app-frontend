@@ -8,7 +8,9 @@ function Cancel() {
   return (
     <div className="Cancel">
       <div>Payment cancelled</div>
-      <div onClick={navigateHome}>Go back to Tribe.com</div>
+      <div className="link" onClick={navigateHome}>
+        Go back to Tribe.com
+      </div>
     </div>
   );
 }

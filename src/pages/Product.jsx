@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackArrow from "../components/BackArrow";
-// import { IoTime } from "react-icons/io5";
-// import { RiBowlFill } from "react-icons/ri";
+import { CgClose } from "react-icons/cg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../app/productsSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { IoMdArrowBack } from "react-icons/io";
 function Product() {
   const product = useSelector((state) => state.products?.product);
 
   const [obj, setObj] = useState({
-    name: product.name,
+    name: "",
     price: "",
     description: "",
     location: "",
@@ -53,6 +52,13 @@ function Product() {
       );
       const data = await response.json();
       if (response.ok === true) {
+        setObj((prev) => ({ ...prev, name: data.name }));
+        setObj((prev) => ({ ...prev, price: data.price }));
+        setObj((prev) => ({ ...prev, description: data.description }));
+        setObj((prev) => ({ ...prev, location: data.location }));
+        setObj((prev) => ({ ...prev, condition: data.condition }));
+        setObj((prev) => ({ ...prev, tags: data.tags }));
+        setObj((prev) => ({ ...prev, delivery: data.delivery }));
         dispatch(setProduct(data));
       }
     } catch (error) {
@@ -65,10 +71,19 @@ function Product() {
     const { name, value } = e.target;
     setObj((prev) => ({ ...prev, [name]: value }));
   }
-  function handleTagSubmit(e) {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setObj((prev) => ({ ...prev, [name]: value }));
+  function handleTagSubmit() {
+    let updateTags = [...obj.tags, tag];
+
+    setObj((prev) => ({ ...prev, tags: updateTags }));
+  }
+  function handleTagDelete(delTag) {
+    let updateTags = [...obj.tags];
+
+    setObj((prev) => ({
+      ...prev,
+      tags: updateTags.filter((tag) => tag !== delTag),
+    }));
+    alert("Tag deleted");
   }
   //navigation
   const navigation = useNavigate();
@@ -160,9 +175,14 @@ function Product() {
   function handleNavigateBack() {
     navigation(`/home/products`);
   }
+
   return (
     <div className="Product">
-      <BackArrow handleNavigate={handleNavigateBack} />
+      {edit ? (
+        <CgClose className="icon" onClick={() => setEdit(false)} />
+      ) : (
+        <BackArrow className="icon" handleNavigate={handleNavigateBack} />
+      )}
       <div className="product-content">
         {edit === true ? (
           <div className="update-form">
@@ -173,6 +193,7 @@ function Product() {
                   type="text"
                   id="product-name"
                   name="name"
+                  max="50"
                   onChange={(e) => handleChange(e)}
                   value={obj.name}
                 />
@@ -198,6 +219,7 @@ function Product() {
                 <textarea
                   id="description"
                   name="description"
+                  maxLength="120"
                   onChange={(e) => handleChange(e)}
                   value={obj.description}
                 ></textarea>
@@ -206,7 +228,7 @@ function Product() {
 
             <div className="location">
               <label htmlFor="location">
-                location
+                Location
                 <select
                   name="location"
                   onChange={handleDropdownChange}
@@ -218,7 +240,7 @@ function Product() {
             </div>
             <div className="condition">
               <label htmlFor="condition">
-                condition
+                Condition
                 <select
                   name="condition"
                   onChange={handleDropdownChange}
@@ -234,6 +256,17 @@ function Product() {
             <div className="tags">
               <label htmlFor="tags">
                 Tag
+                <div className="update tags">
+                  {obj.tags.length > 0 &&
+                    obj.tags.map((tag, i) => (
+                      <div className="update tag" key={i}>
+                        <div>{tag}</div>
+                        <div onClick={() => handleTagDelete(tag)}>
+                          <CgClose />
+                        </div>
+                      </div>
+                    ))}
+                </div>
                 <input
                   type="text"
                   id="tags"
@@ -241,12 +274,17 @@ function Product() {
                   onChange={(e) => setTag(e.target.value)}
                   value={tag}
                 />
-                <button onClick={(e) => handleTagSubmit(e)}>Add tag</button>
+                <button
+                  className="add-tag-btn"
+                  onClick={() => handleTagSubmit()}
+                >
+                  Add tag
+                </button>
               </label>
             </div>
             <div className="delivery">
               <label htmlFor="delivery">
-                delivery
+                Delivery
                 <select
                   name="delivery"
                   onChange={handleDropdownChange}
@@ -258,30 +296,6 @@ function Product() {
                 </select>
               </label>
             </div>
-
-            {/* <div className="pic">
-              <label htmlFor="pic">
-                Picture:
-                <input
-                  type="file"
-                  id="pic"
-                  name="pic"
-                  onChange={(e) => handleImageUpload(e)}
-                />
-                <input
-                  type="file"
-                  id="pic"
-                  name="pic"
-                  onChange={(e) => handleImageUpload(e)}
-                />
-                <input
-                  type="file"
-                  id="pic"
-                  name="pic"
-                  onChange={(e) => handleImageUpload(e)}
-                />
-              </label>
-            </div> */}
           </div>
         ) : (
           <div className="product-info">
@@ -312,8 +326,19 @@ function Product() {
             </div>
             <div className="product-info">
               <div>{product && product.name}</div>
+              <div>Tags: </div>
+              <div className="update tags">
+                {obj.tags.length > 0 &&
+                  obj.tags.map((tag, i) => (
+                    <div className="update tag" key={i}>
+                      <div>{tag}</div>
+                    </div>
+                  ))}
+              </div>
               <div>R{product && product.price}</div>
-              <div>{product && product.description}</div>
+              <div className="description">
+                {product && product.description}
+              </div>
             </div>
           </div>
         )}

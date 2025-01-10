@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { IoCloseOutline } from "react-icons/io5";
+import { CgClose } from "react-icons/cg";
 function ProductForm({ toggleClicked }) {
   const [obj, setObj] = useState({
     productName: "",
@@ -30,16 +31,32 @@ function ProductForm({ toggleClicked }) {
 
     setObj((prev) => ({ ...prev, tags: updateTags }));
   }
+  function handleTagDelete(delTag) {
+    let updateTags = [...obj.tags];
+
+    setObj((prev) => ({
+      ...prev,
+      tags: updateTags.filter((tag) => tag !== delTag),
+    }));
+    alert("Tag deleted");
+  }
   function handleDropdownChange(e) {
     const { name, value } = e.target;
     setObj((prev) => ({ ...prev, [name]: value }));
   }
 
   async function handleSubmit() {
-    console.log(obj);
-    if (obj.name === "" && obj.price === "" && obj.description === "") {
+    if (
+      obj.productName === "" ||
+      obj.price === "" ||
+      obj.category === "" ||
+      obj.description === "" ||
+      obj.location === "" ||
+      obj.condition === "" ||
+      obj.delivery === ""
+    ) {
       alert("Please enter product information.");
-      toggleClicked();
+      //toggleClicked();
       return;
     }
     const formData = new FormData();
@@ -49,15 +66,12 @@ function ProductForm({ toggleClicked }) {
     formData.append("description", obj.description);
     formData.append("location", obj.location);
     formData.append("condition", obj.condition);
-    formData.append("tags", obj.tags);
+    formData.append("tags", JSON.stringify(obj.tags));
     formData.append("delivery", obj.delivery);
-    // for (let i = 0; i < obj.images.length; i++) {
-    //   formData.append("files[]", obj.images[i]);
-    // }
+
     Object.values(images).forEach((file) => {
       formData.append("image", file);
     });
-    // formData.append("profilePic", obj.profilePic);
     try {
       const response = await fetch("http://localhost:3000/api/products", {
         method: "POST",
@@ -68,12 +82,12 @@ function ProductForm({ toggleClicked }) {
       });
       const data = await response.json();
       if (response.ok === true) {
-        navigation(0);
       }
     } catch (error) {
       console.log(error);
     }
     toggleClicked();
+    navigation(0);
   }
   function handleImageUpload(e) {
     setImage(e.target.files[0]);
@@ -96,7 +110,7 @@ function ProductForm({ toggleClicked }) {
         <div className="form-title-close">
           <h3>Enter Product Information</h3>
           <div className="form-close" onClick={handleFormClose}>
-            x
+            <IoCloseOutline className="icon" />
           </div>
         </div>
         <div className="form">
@@ -107,6 +121,7 @@ function ProductForm({ toggleClicked }) {
                 type="text"
                 id="name"
                 name="productName"
+                max="50"
                 onChange={(e) => handleChange(e)}
                 value={obj.productName}
               />
@@ -127,7 +142,7 @@ function ProductForm({ toggleClicked }) {
           </div>
           <div className="category">
             <label htmlFor="category">
-              category
+              Category
               <select
                 name="category"
                 onChange={handleDropdownChange}
@@ -147,6 +162,7 @@ function ProductForm({ toggleClicked }) {
               <textarea
                 id="description"
                 name="description"
+                maxLength="120"
                 onChange={(e) => handleChange(e)}
                 value={obj.description}
               ></textarea>
@@ -155,8 +171,7 @@ function ProductForm({ toggleClicked }) {
 
           <div className="location">
             <label htmlFor="location">
-              location
-              
+              Location
               <select
                 name="location"
                 onChange={handleDropdownChange}
@@ -169,7 +184,7 @@ function ProductForm({ toggleClicked }) {
           </div>
           <div className="condition">
             <label htmlFor="condition">
-              condition
+              Condition
               <select
                 name="condition"
                 onChange={handleDropdownChange}
@@ -185,18 +200,31 @@ function ProductForm({ toggleClicked }) {
           <div className="tags">
             <label htmlFor="tags">
               Tag
+              <div className="update tags">
+                {obj.tags.length > 0 &&
+                  obj.tags.map((tag, i) => (
+                    <div className="update tag" key={i}>
+                      <div>{tag}</div>
+                      <div onClick={() => handleTagDelete(tag)}>
+                        <CgClose />
+                      </div>
+                    </div>
+                  ))}
+              </div>
               <input
                 type="text"
                 id="tags"
                 name="tags"
                 onChange={(e) => setTag(e.target.value)}
               />
-              <button onClick={() => handleTagSubmit()}>Add Tag</button>
+              <button className="add-tag-btn" onClick={() => handleTagSubmit()}>
+                Add Tag
+              </button>
             </label>
           </div>
           <div className="delivery">
             <label htmlFor="delivery">
-              delivery
+              Delivery
               <select
                 name="delivery"
                 onChange={handleDropdownChange}
@@ -218,13 +246,6 @@ function ProductForm({ toggleClicked }) {
                 multiple
                 onChange={(e) => setImages(e.target.files)}
               />
-              {/* <input
-                type="file"
-                id="images"
-                name="images"
-                onChange={(e) => setImage(e.target.value)}
-              />
-              <button onClick={() => handleImageSubmit()}>Add Image</button> */}
             </label>
           </div>
           <button onClick={() => handleSubmit()}>Submit</button>

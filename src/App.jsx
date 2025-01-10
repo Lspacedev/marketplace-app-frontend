@@ -5,6 +5,7 @@ import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedAuth from "./components/ProtectedAuth";
 import { setUser } from "./app/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -16,17 +17,16 @@ import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
-import Reviews from "./pages/Reviews"
+import Reviews from "./pages/Reviews";
 function App() {
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("token");
-
   useEffect(() => {
-    if (token !== "") {
+    if (typeof token !== "undefined" && token !== null) {
       fetchUser();
     }
-  }, []);
+  }, [token]);
   async function fetchUser() {
     try {
       const res = await fetch("http://localhost:3000/api/profile", {
@@ -54,8 +54,10 @@ function App() {
               <Route path=":item_id" element={<Item />} />
             </Route>
           </Route>
-          <Route exact path="register" element={<Registration />} />
-          <Route exact path="login" element={<Login />} />
+          <Route element={<ProtectedAuth />}>
+            <Route exact path="register" element={<Registration />} />
+            <Route exact path="login" element={<Login />} />
+          </Route>
 
           <Route element={<ProtectedRoute />}>
             <Route path="success" element={<Success />} />
@@ -64,10 +66,11 @@ function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route path="home" element={<HomePage />}>
+              <Route index element={<Orders />} />
+
               <Route path="products" element={<Products />}>
                 <Route path=":product_id" element={<Product />} />
               </Route>
-              <Route path="orders" element={<Orders />} />
               <Route path="reviews" element={<Reviews />} />
 
               <Route path="profile" element={<UserProfile />} />

@@ -6,7 +6,7 @@ function Login() {
     username: "",
     password: "",
   });
-  const [err, setErr] = useState("");
+  const [errors, setErrors] = useState([]);
   //navigation
   const navigation = useNavigate();
 
@@ -22,20 +22,24 @@ function Login() {
 
   async function handleSubmit() {
     try {
+      if (loginDetails.username === "" || loginDetails.password === "") {
+        alert("Fields are required");
+        return;
+      }
       const res = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginDetails),
       });
       const data = await res.json();
-
+      console.log({ res, data });
       if (res.ok === true) {
         alert(data.message);
         localStorage.setItem("token", data.token);
         navigation("/home");
         navigation(0);
       } else {
-        setErr(data.message);
+        setErrors(data.errors);
       }
     } catch (err) {
       console.log(err.message);
@@ -44,46 +48,57 @@ function Login() {
 
   return (
     <div className="Login">
-      <div className="login-form-container">
-        <h2>Welcome back!</h2>
-        {err && <span className="err">{err}</span>}
-        <div className="form">
-          <div className="username">
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                id="username"
-                name="username"
-                onChange={(e) => handleChange(e)}
-                value={loginDetails.username}
-              />
-            </label>
-          </div>
+      <div className="page-container">
+        <div className="login-form-container">
+          <h2>Welcome back!</h2>
+          {errors &&
+            errors.length > 0 &&
+            errors.map((err, i) => (
+              <span key={i} className="err">
+                {err}
+              </span>
+            ))}
+          <div className="form">
+            <div className="username">
+              <label htmlFor="username">
+                Username:
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  onChange={(e) => handleChange(e)}
+                  value={loginDetails.username}
+                />
+              </label>
+            </div>
 
-          <div className="password">
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={(e) => handleChange(e)}
-                value={loginDetails.password}
-              />
-            </label>
-          </div>
+            <div className="password">
+              <label htmlFor="password">
+                Password:
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={(e) => handleChange(e)}
+                  value={loginDetails.password}
+                />
+              </label>
+            </div>
 
-          <button onClick={() => handleSubmit()}>Submit</button>
+            <button onClick={() => handleSubmit()}>Submit</button>
+          </div>
+          <div className="login-to-register">
+            Don't have an account?{" "}
+            <p onClick={handleNavigateRegister}>Register here</p>
+          </div>
         </div>
-        <div className="login-to-register">
-          Don't have an account?{" "}
-          <p onClick={handleNavigateRegister}>Register here</p>
+        <div className="login-img">
+          <img
+            src="/images/pexels-polina-tankilevitch-4440839.jpg"
+            alt="register"
+          />
         </div>
       </div>
-      {/* <div className="login-img">
-        <img src="images/login-register.jpg" alt="login" />
-      </div> */}
     </div>
   );
 }

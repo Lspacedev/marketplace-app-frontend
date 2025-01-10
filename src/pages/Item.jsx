@@ -30,6 +30,7 @@ function Item() {
   const navigation = useNavigate();
 
   const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.user.user);
 
   async function fetchProduct() {
     try {
@@ -54,6 +55,8 @@ function Item() {
 
   async function buyProduct() {
     try {
+      //remove item from cart
+      removeFromCart(item_id);
       const response = await fetch(
         `http://localhost:3000/api/public/products/${item_id}/buy`,
         {
@@ -65,7 +68,6 @@ function Item() {
           body: {},
         }
       );
-      console.log(response);
       const data = await response.json();
       console.log(data);
 
@@ -98,7 +100,15 @@ function Item() {
     });
     console.warn(error.message);
   }
-  async function buy() {
+  async function buy(sellerId) {
+    if (token === null) {
+      alert("Please login to buy product");
+      return;
+    }
+    if (user._id === sellerId) {
+      alert("Cannot buy own product");
+      return;
+    }
     let buyConfirmation = window.confirm(
       "You are about to buy this item. You'll be taken to a payment gateway. Continue?"
     );
@@ -110,9 +120,27 @@ function Item() {
       }
     }
   }
+  async function removeFromCart(id) {
+    try {
+      const res = await fetch(`http://localhost:3000/api/cart/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId: id }),
+      });
+      if (res.ok === true) {
+        console.log(res);
+        //navigation(0);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="Item">
-      <BackArrow handleNavigate={handleNavigateBack} />
+      <BackArrow className="back" handleNavigate={handleNavigateBack} />
       <div className="product-content">
         <div className="product-gallery">
           <div className="slides" ref={slidesRef}>
@@ -140,15 +168,23 @@ function Item() {
           </div>
         </div>
         <div className="product-info">
-          <div>{product && product.name}</div>
+          <div className="text">{product && product.name}</div>
 
           <div>
             <h4>Price</h4>R{product && product.price}
           </div>
-          <div>{product && product.category}</div>
+          <div className="text">{product && product.category}</div>
 
-          <div>{product && product.description}</div>
-          <button onClick={buy}>Buy Now</button>
+          <div className="text">{product && product.description}</div>
+          <button
+            onClick={() =>
+              product && product.status === "SOLD"
+                ? alert("Product sold")
+                : buy(product.sellerId)
+            }
+          >
+            {product && product.status === "SOLD" ? "Sold" : "Buy"}
+          </button>
         </div>
       </div>
     </div>

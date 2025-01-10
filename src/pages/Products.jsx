@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Outlet, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../app/productsSlice";
-
+import DashProductCard from "../components/DashProductCard";
 function Products() {
   const [searchResults, setSearchResults] = useState([]);
   const { product_id } = useParams();
@@ -47,27 +46,19 @@ function Products() {
         <Outlet />
       ) : (
         <div className="products-div">
-          {searchResults && searchResults.length !== 0 ? (
-            searchResults.map((product, i) => (
-              <div className="item" key={i}>
-                <ProductCard
-                  handleNavigate={handleNavigateProduct}
-                  product={product}
-                  index={i}
-                />
-              </div>
-            ))
-          ) : products.length > 0 ? (
+          {products.length > 0 ? (
             products.map((product, i) => (
               <div className="item" key={i}>
-                <ProductCard
+                <DashProductCard
                   handleNavigate={handleNavigateProduct}
                   product={product}
                 />
               </div>
             ))
           ) : (
-            <div>No products added</div>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              No products added
+            </div>
           )}
         </div>
       )}

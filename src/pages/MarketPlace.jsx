@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setPublicProducts } from "../app/publicSlice";
+import { FaArrowLeft } from "react-icons/fa6";
 
 function MarketPlace() {
   const [searchResults, setSearchResults] = useState([]);
@@ -125,22 +126,22 @@ function MarketPlace() {
   }
   return (
     <div className="MarketPlace">
+      {searchResults && searchResults.length > 0 && (
+        <div className="none">
+          <p
+            onClick={() => {
+              navigation("/");
+              navigation(0);
+            }}
+          >
+            <FaArrowLeft className="icon" />
+          </p>
+        </div>
+      )}
       {item_id !== "" && typeof item_id !== "undefined" ? (
         <Outlet />
       ) : (
         <div className="items-div">
-          {searchResults && searchResults.length > 0 && (
-            <div className="none">
-              <p
-                onClick={() => {
-                  navigation("/");
-                  navigation(0);
-                }}
-              >
-                Back to marketplace
-              </p>
-            </div>
-          )}
           {searchResults && searchResults.length !== 0 ? (
             searchResults.map((product, i) => (
               <div className="item" key={i}>
@@ -152,7 +153,7 @@ function MarketPlace() {
               </div>
             ))
           ) : searchResults.length === 0 && notFound === true ? (
-            <div className="none">
+            <div className="none" style={{ margin: "20px auto" }}>
               <div>No products available</div>
               <p
                 onClick={() => {
@@ -176,7 +177,7 @@ function MarketPlace() {
               />
             ))
           ) : (
-            <div>No products available</div>
+            <div style={{ margin: "20px auto" }}>No products available</div>
           )}
         </div>
       )}

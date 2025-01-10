@@ -262,7 +262,7 @@ function Product() {
                       <div className="update tag" key={i}>
                         <div>{tag}</div>
                         <div onClick={() => handleTagDelete(tag)}>
-                          <CgClose />
+                          <CgClose className="icon" />
                         </div>
                       </div>
                     ))}

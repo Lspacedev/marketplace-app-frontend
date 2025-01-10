@@ -127,11 +127,14 @@ button {
 }
 
 .none {
-  padding: 25px 0px;
+  padding: 25px 200px;
 }
 .none p {
   cursor: pointer;
   color: #626267;
+}
+.none p .icon {
+  font-size: 1.8rem;
 }
 .none p:hover {
   color: rgb(201, 201, 201);
@@ -629,7 +632,8 @@ select {
 }
 
 .ProductForm .form-close {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  margin: 0px;
 }
 
 .ProductCard .product-info p {
@@ -954,6 +958,7 @@ select {
 
 .ProductForm .form-div {
   margin: 25px 0px;
+  background-color: white;
 }
 .ProductForm .form-div .form {
   margin: 0 auto 0 auto;
@@ -1147,9 +1152,19 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
   background-color: rgba(133, 133, 133, 0.123);
-  padding: 15px;
-  border-radius: 50%;
+  padding: 5px 25px;
+  border-radius: 15px;
+}
+
+.update.tag div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.update.tag div .icon {
+  font-size: 1.3rem;
 }
 .add-tag-btn {
   width: 25%;

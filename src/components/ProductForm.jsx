@@ -73,13 +73,16 @@ function ProductForm({ toggleClicked }) {
       formData.append("image", file);
     });
     try {
-      const response = await fetch("http://localhost:3000/api/products", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/api/products`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
       const data = await response.json();
       if (response.ok === true) {
       }

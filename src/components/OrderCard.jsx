@@ -14,7 +14,9 @@ function OrderCard({ order }) {
     console.log({ order });
     try {
       const response = await fetch(
-        `http://localhost:3000/api/public/products/${order.productId}`,
+        `${import.meta.env.VITE_PROD_URL}/api/public/products/${
+          order.productId
+        }`,
         {
           method: "GET",
           headers: {

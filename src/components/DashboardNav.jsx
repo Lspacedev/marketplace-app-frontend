@@ -14,7 +14,7 @@ function DashboardNav() {
   async function becomeSeller() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/profile/become-seller`,
+        `${import.meta.env.VITE_PROD_URL}/api/profile/become-seller`,
         {
           method: "PUT",
           headers: {

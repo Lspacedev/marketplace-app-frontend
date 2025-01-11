@@ -27,7 +27,7 @@ function ReviewForm({ toggleClicked }) {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:3000/api/public/reviews`,
+          `${import.meta.env.VITE_PROD_URL}/api/public/reviews`,
           {
             method: "POST",
             headers: {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { CgClose } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 function ReviewForm({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -10,6 +11,7 @@ function ReviewForm({ toggleClicked }) {
   });
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
+  const navigation = useNavigate();
 
   function handleChange(e) {
     e.preventDefault();
@@ -44,6 +46,7 @@ function ReviewForm({ toggleClicked }) {
         toggleClicked();
 
         setLoading(false);
+        navigation(0);
       } catch (error) {
         console.log(error);
         toggleClicked();

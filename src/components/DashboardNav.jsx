@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { MdOutlineExplore } from "react-icons/md";
+import { MdOutlineSell } from "react-icons/md";
 function DashboardNav() {
   const navigation = useNavigate();
 
@@ -36,13 +37,21 @@ function DashboardNav() {
   return (
     <div className="DashboardNav">
       <div className="discover" onClick={() => navigation("/")}>
-        Discover
+        <MdOutlineExplore fontSize="1.4rem" />
+        <div>Expore</div>
       </div>
 
       {user && user.role && user.role !== "SELLER" ? (
-        <div onClick={becomeSeller}>Become seller</div>
+        <div className="seller" onClick={becomeSeller}>
+          <MdOutlineSell fontSize="1.4rem" />
+
+          <div>Become seller</div>
+        </div>
       ) : (
-        <div onClick={() => alert("Already a seller")}>SELLER</div>
+        <div className="seller" onClick={() => alert("Already a seller")}>
+          <MdOutlineSell fontSize="1.4rem" />
+          <div>SELLER</div>
+        </div>
       )}
       <div className="profile-icon" onClick={navigateProfile}>
         <img

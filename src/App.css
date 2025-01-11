@@ -553,9 +553,18 @@ select {
 .DashboardNav div {
   cursor: pointer;
 }
-
+.DashboardNav .discover {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 .DashboardNav .discover:hover {
   color: #36363a;
+}
+.DashboardNav .seller {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .Sidebar {
   flex: 2;

@@ -16,6 +16,7 @@ button {
 
 .Landing {
   height: 100%;
+  overflow-y: auto;
 }
 /* Nav */
 .Nav {
@@ -620,7 +621,6 @@ select {
 
 .Products .products-div {
   height: 100%;
-
   margin: 0px;
   padding: 25px;
 
@@ -632,7 +632,7 @@ select {
 
 .Products .item {
   width: 250px;
-  height: 200px;
+  height: 300px;
   margin: 5px 0px;
 
   word-wrap: break-word;
@@ -748,18 +748,18 @@ select {
   cursor: pointer;
 }
 .MarketPlace {
-  height: 900px;
+  min-height: 900px;
 }
 .items-div {
   height: 100%;
   display: flex;
-  padding: 0px 300px;
+  padding: 25px 300px;
   flex-wrap: wrap;
   gap: 35px;
 }
 
 .MarketPlace .ProductCard {
-  height: 40%;
+  height: 400px;
   width: 250px;
   border-radius: 25px;
   box-shadow: 2px 2px 5px #bbb;
@@ -778,7 +778,6 @@ select {
 
 .MarketPlace .ProductCard .img {
   height: 70%;
-  background-color: gray;
   text-align: center;
   position: relative;
   cursor: pointer;

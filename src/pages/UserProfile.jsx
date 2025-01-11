@@ -35,6 +35,10 @@ function UserProfile({ userId }) {
 
   async function handleSubmit() {
     try {
+      if (user.username === "Guest") {
+        alert("Cannot update guest account");
+        return;
+      }
       setLoading(true);
       const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/profile`, {
         method: "PUT",

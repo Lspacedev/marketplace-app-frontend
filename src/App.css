@@ -1325,7 +1325,10 @@ select {
   border-radius: 25px;
   text-align: center;
 }
-
+.ReviewCard div {
+  flex: 1;
+  text-align: start;
+}
 .ReviewCard .review-text {
   display: flex;
   justify-content: space-evenly;

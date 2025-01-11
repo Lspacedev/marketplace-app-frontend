@@ -60,7 +60,6 @@ function ReviewForm({ toggleClicked }) {
   const user = useSelector((state) => state.user.user);
 
   const purchasedProducts = user.purchasedProducts;
-  if (loading) return <div style={{ textAlign: "center" }}>Loading...</div>;
 
   return (
     <div className="ReviewForm">
@@ -82,7 +81,9 @@ function ReviewForm({ toggleClicked }) {
                 value={obj.value}
               >
                 <option></option>
-                {typeof purchasedProducts !== "undefined" &&
+                {user &&
+                  typeof purchasedProducts !== "undefined" &&
+                  purchasedProducts &&
                   purchasedProducts.length > 0 &&
                   purchasedProducts.map((product, i) => (
                     <option key={i} value={product.seller}>
@@ -122,12 +123,16 @@ function ReviewForm({ toggleClicked }) {
             </label>
           </div>
 
-          <input
-            id="task-add-submit"
-            type="submit"
-            value="Submit"
-            onClick={handleSubmit}
-          ></input>
+          {loading ? (
+            <div style={{ textAlign: "center" }}>Loading...</div>
+          ) : (
+            <input
+              id="task-add-submit"
+              type="submit"
+              value="Submit"
+              onClick={handleSubmit}
+            ></input>
+          )}
         </form>
       </div>
     </div>

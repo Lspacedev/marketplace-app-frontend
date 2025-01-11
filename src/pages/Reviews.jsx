@@ -36,7 +36,6 @@ function Reviews() {
     }
   }
 
-  console.log({ reviews });
   return (
     <div className="Reviews">
       {user && user.purchasedProducts && user.purchasedProducts.length > 0 && (

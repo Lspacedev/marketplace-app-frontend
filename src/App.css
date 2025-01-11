@@ -1328,6 +1328,7 @@ select {
 .ReviewCard div {
   flex: 1;
   text-align: start;
+  padding-left: 15px;
 }
 .ReviewCard .review-text {
   display: flex;

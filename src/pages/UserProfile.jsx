@@ -36,7 +36,7 @@ function UserProfile({ userId }) {
   async function handleSubmit() {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3000/api/profile`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

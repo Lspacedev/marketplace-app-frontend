@@ -6,6 +6,7 @@ function Login() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   //navigation
   const navigation = useNavigate();
@@ -26,23 +27,52 @@ function Login() {
         alert("Fields are required");
         return;
       }
-      const res = await fetch("http://localhost:3000/api/login", {
+      setLoading(true);
+
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginDetails),
       });
       const data = await res.json();
-      console.log({ res, data });
+      setLoading(false);
+
       if (res.ok === true) {
         alert(data.message);
         localStorage.setItem("token", data.token);
+
         navigation("/home");
         navigation(0);
       } else {
         setErrors(data.errors);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err.message);
+    }
+  }
+  async function guestSignIn() {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/api/guest-log-in`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Content-length": 0 },
+        }
+      );
+      const data = await res.json();
+      setLoading(false);
+      if (typeof data.errors !== "undefined") {
+        setErrors(data.errors);
+      } else {
+        alert(data.message);
+        localStorage.setItem("token", data.token);
+        navigation("/home");
+        navigation(0);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -71,7 +101,6 @@ function Login() {
                 />
               </label>
             </div>
-
             <div className="password">
               <label htmlFor="password">
                 Password:
@@ -84,8 +113,15 @@ function Login() {
                 />
               </label>
             </div>
-
-            <button onClick={() => handleSubmit()}>Submit</button>
+            <button onClick={loading ? console.log() : handleSubmit}>
+              {loading ? "Loading..." : "Submit"}
+            </button>
+            <button
+              className="guest-submit"
+              onClick={loading ? console.log() : guestSignIn}
+            >
+              {loading ? "Loading..." : "Guest"}
+            </button>{" "}
           </div>
           <div className="login-to-register">
             Don't have an account?{" "}

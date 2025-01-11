@@ -13,6 +13,7 @@ function Registration() {
     profilePic: "",
   });
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   //navigation
   const navigation = useNavigate();
@@ -47,6 +48,8 @@ function Registration() {
       alert("Fields are required");
       return;
     }
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("username", userDetails.username);
     formData.append("email", userDetails.email);
@@ -57,12 +60,11 @@ function Registration() {
     formData.append("country", userDetails.country);
     formData.append("profilePic", userDetails.profilePic);
     try {
-      const res = await fetch(`http://localhost:3000/api/register`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/register`, {
         method: "POST",
         body: formData,
       });
       const data = await res.json();
-      console.log({ res, data });
 
       if (res.ok) {
         alert(data.message);
@@ -70,8 +72,10 @@ function Registration() {
       } else {
         setErrors(data.errors);
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(true);
     }
   }
 
@@ -184,7 +188,9 @@ function Registration() {
               </label>
             </div>
 
-            <button onClick={() => handleSubmit()}>Submit</button>
+            <button onClick={loading ? console.log() : handleSubmit}>
+              {loading ? "Loading..." : "Submit"}
+            </button>
           </div>
         </div>
         <div className="register-img">

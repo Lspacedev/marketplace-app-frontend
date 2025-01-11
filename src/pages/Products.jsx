@@ -19,7 +19,7 @@ function Products() {
   }, []);
   async function fetchProducts() {
     try {
-      const res = await fetch(`http://localhost:3000/api/products`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/products`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

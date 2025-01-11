@@ -32,7 +32,7 @@ function MarketPlace() {
   async function fetchPublicProducts() {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/public/products?page=${1}`,
+        `${import.meta.env.VITE_PROD_URL}/api/public/products?page=${1}`,
         {
           method: "GET",
           headers: {
@@ -90,7 +90,7 @@ function MarketPlace() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3000/api/cart`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,14 +108,17 @@ function MarketPlace() {
   }
   async function removeFromCart(id) {
     try {
-      const res = await fetch(`http://localhost:3000/api/cart/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId: id }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/api/cart/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ productId: id }),
+        }
+      );
       if (res.ok === true) {
         console.log(res);
         navigation(0);

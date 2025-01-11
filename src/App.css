@@ -257,6 +257,21 @@ select {
 .Login button:hover {
   background-color: #36363a;
 }
+.Login .guest-submit {
+  margin: 5px 0px;
+  width: 100%;
+  border: 1px solid #141414;
+  color: #141414;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.Login .guest-submit:hover {
+  background-color: #141414;
+  color: white;
+  cursor: pointer;
+}
 
 .login-img {
   flex: 1;

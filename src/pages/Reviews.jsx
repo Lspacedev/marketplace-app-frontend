@@ -16,13 +16,16 @@ function Reviews() {
 
   async function fetchReviews() {
     try {
-      const response = await fetch(`http://localhost:3000/api/public/reviews`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/api/public/reviews`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       console.log({ data });
       if (response.ok === true) {

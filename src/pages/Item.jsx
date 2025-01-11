@@ -35,7 +35,7 @@ function Item() {
   async function fetchProduct() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/public/products/${item_id}`,
+        `${import.meta.env.VITE_PROD_URL}/api/public/products/${item_id}`,
         {
           method: "GET",
           headers: {
@@ -58,7 +58,7 @@ function Item() {
       //remove item from cart
       removeFromCart(item_id);
       const response = await fetch(
-        `http://localhost:3000/api/public/products/${item_id}/buy`,
+        `${import.meta.env.VITE_PROD_URL}/api/public/products/${item_id}/buy`,
         {
           method: "PUT",
           headers: {
@@ -94,8 +94,8 @@ function Item() {
         },
       ],
       mode: "payment",
-      successUrl: `http://localhost:5173/success`,
-      cancelUrl: `http://localhost:5173/cancel`,
+      successUrl: `${import.meta.env.VITE_CLIENT_URL}/success`,
+      cancelUrl: `${import.meta.env.VITE_CLIENT_URL}/cancel`,
       customerEmail: "customer@email.com",
     });
     console.warn(error.message);
@@ -122,14 +122,17 @@ function Item() {
   }
   async function removeFromCart(id) {
     try {
-      const res = await fetch(`http://localhost:3000/api/cart/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId: id }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/api/cart/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ productId: id }),
+        }
+      );
       if (res.ok === true) {
         console.log(res);
         //navigation(0);

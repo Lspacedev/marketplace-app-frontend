@@ -19,7 +19,6 @@ function Landing() {
     search.classList.toggle("active");
   }
   const token = localStorage.getItem("token");
-  console.log(publicProducts);
   return (
     <div className="Landing">
       <Nav />

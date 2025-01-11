@@ -41,7 +41,7 @@ function Product() {
   async function fetchProduct() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/${product_id}`,
+        `${import.meta.env.VITE_PROD_URL}/api/products/${product_id}`,
         {
           method: "GET",
           headers: {
@@ -100,7 +100,7 @@ function Product() {
     if (deleteConfirmation) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products/${product_id}`,
+          `${import.meta.env.VITE_PROD_URL}/api/products/${product_id}`,
           {
             method: "DELETE",
             headers: {
@@ -139,7 +139,7 @@ function Product() {
     if (updateConfirmation) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products/${product_id}`,
+          `${import.meta.env.VITE_PROD_URL}/api/products/${product_id}`,
           {
             method: "PUT",
             headers: {

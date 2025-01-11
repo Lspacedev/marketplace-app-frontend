@@ -29,7 +29,7 @@ function App() {
   }, [token]);
   async function fetchUser() {
     try {
-      const res = await fetch("http://localhost:3000/api/profile", {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/api/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

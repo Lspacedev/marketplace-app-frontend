@@ -31,7 +31,6 @@ function Landing() {
         </Categories>
       )}
 
-      {/* <Categories heading="Popular"></Categories> */}
       <Outlet />
       <Footer />
       <div className="Cart">

@@ -89,7 +89,7 @@ function Item() {
     const { error } = await stripe.redirectToCheckout({
       lineItems: [
         {
-          price: import.meta.env.VITE_NEXT_PUBLIC_STRIPE_PRICE_ID,
+          price: process.env.STRIPE_PRICE_ID,
           quantity: qty,
         },
       ],

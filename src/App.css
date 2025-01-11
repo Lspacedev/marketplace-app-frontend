@@ -677,7 +677,7 @@ select {
   width: 100%;
 }
 .Product .slides {
-  height: 400px;
+  height: 700px;
   width: 45vw;
   position: relative;
   margin: 25px auto;
@@ -690,6 +690,7 @@ select {
 }
 .currentSlide {
   width: inherit;
+  height: 700px;
 }
 .slides img {
   width: inherit;

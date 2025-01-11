@@ -17,6 +17,7 @@ function ProductForm({ toggleClicked }) {
   const [tag, setTag] = useState("");
   const [images, setImages] = useState([]);
   const user = useSelector((state) => state.user.user);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
@@ -59,6 +60,7 @@ function ProductForm({ toggleClicked }) {
       //toggleClicked();
       return;
     }
+    setLoading(true);
     const formData = new FormData();
     formData.append("name", obj.productName);
     formData.append("price", obj.price);
@@ -86,15 +88,17 @@ function ProductForm({ toggleClicked }) {
       const data = await response.json();
       if (response.ok === true) {
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
     toggleClicked();
     navigation(0);
   }
-  function handleImageUpload(e) {
-    setImage(e.target.files[0]);
-  }
+  // function handleImageUpload(e) {
+  //   setImage(e.target.files[0]);
+  // }
   function handleImageSubmit(e) {
     let updateImages = [...obj.images, image];
 
@@ -251,7 +255,9 @@ function ProductForm({ toggleClicked }) {
               />
             </label>
           </div>
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <button onClick={loading ? console.log() : handleSubmit}>
+            {loading ? "Loading..." : "Submit"}
+          </button>
         </div>
       </div>
     </div>

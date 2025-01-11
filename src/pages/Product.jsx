@@ -24,6 +24,8 @@ function Product() {
   }, []);
   const slidesRef = useRef(null);
   const [activeImageNum, setCurrent] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   const length = product?.images?.length;
   const nextSlide = () => {
     setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
@@ -137,6 +139,7 @@ function Product() {
       "You are about to update product information. Continue?"
     );
     if (updateConfirmation) {
+      setLoading(true);
       try {
         const response = await fetch(
           `${import.meta.env.VITE_PROD_URL}/api/products/${product_id}`,
@@ -151,11 +154,13 @@ function Product() {
         );
         if (response.ok === true) {
           alert("Update success");
+          setLoading(false);
           navigation(0);
         }
         setEdit(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     } else {
       setEdit(false);
@@ -175,7 +180,10 @@ function Product() {
   function handleNavigateBack() {
     navigation(`/home/products`);
   }
-
+  if (loading)
+    return (
+      <div style={{ textAlign: "center", marginTop: "25px" }}>Loading...</div>
+    );
   return (
     <div className="Product">
       {edit ? (

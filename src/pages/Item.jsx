@@ -170,14 +170,12 @@ function Item() {
           </div>
         </div>
         <div className="product-info">
-          <div className="text">{product && product.name}</div>
+          <div className="name">{product && product.name}</div>
 
-          <div>
-            <h4>Price</h4>R{product && product.price}
-          </div>
-          <div className="text">{product && product.category}</div>
+          <div className="price">R{product && product.price}</div>
+          <div className="category">{product && product.category}</div>
 
-          <div className="text">{product && product.description}</div>
+          <div className="description">{product && product.description}</div>
           <button
             onClick={() =>
               product && product.status === "SOLD"

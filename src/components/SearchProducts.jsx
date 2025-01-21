@@ -6,6 +6,7 @@ import {
 } from "../app/publicSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { CgSearch } from "react-icons/cg";
 
 function SearchProducts() {
   const [searchInput, setSearchInput] = useState("");
@@ -40,7 +41,9 @@ function SearchProducts() {
         onChange={handleSearchChange}
       />
 
-      <input type="submit" value="Search" onClick={handleSearchSubmit} />
+      <button className="search-btn" onClick={handleSearchSubmit}>
+        <CgSearch className="icon" />
+      </button>
     </div>
   );
 }

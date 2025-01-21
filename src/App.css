@@ -29,11 +29,11 @@ button {
 }
 .Nav .cart-icon {
   margin: 0px 25px;
+  position: relative;
 }
 .Nav .cart-icon .icon {
   color: #141414;
   font-size: 2rem;
-  position: relative;
 }
 .Nav .cart-icon span {
   color: #141414;
@@ -117,50 +117,63 @@ button {
   left: 50%;
   transform: translate(-50%, 0%);
   display: flex;
-  gap: 5px;
+  gap: 0px;
   align-items: center;
 
   padding: 0px;
-  background-color: white;
 
   border-radius: 25px;
   z-index: 2;
+  box-shadow: 1px 1px 25px black;
 }
 
 .none {
   padding: 25px 200px;
 }
 .none p {
+  width: fit-content;
   cursor: pointer;
-  color: #626267;
+  color: #141414;
 }
 .none p .icon {
   font-size: 1.8rem;
 }
 .none p:hover {
-  color: rgb(201, 201, 201);
+  color: rgb(95, 95, 95);
 }
 
 .SearchProducts input {
-  flex: 3;
+  flex: 4;
   padding: 5px 0px;
   border-radius: 25px 0px 0px 25px;
   border: none;
-
+  outline: none;
+  margin: 0px;
   text-align: center;
 }
-
-.SearchProducts input[type="submit"] {
+.SearchProducts input:focus {
+  border: 1px solid #141414;
+}
+.SearchProducts .search-btn {
   flex: 1;
   height: 100%;
-  padding: 5px 32px;
-
+  padding: 5px;
+  margin: 0px;
   border-radius: 0px 25px 25px 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
   background-color: #141414;
-  color: white;
-  font-weight: 700;
+  box-sizing: border-box;
 }
-.SearchProducts input[type="submit"]:hover {
+.SearchProducts .search-btn .icon {
+  font-size: 1.4rem;
+  color: white;
+}
+.SearchProducts .search-btn:hover {
   background-color: #434347;
   cursor: pointer;
 }
@@ -534,7 +547,7 @@ select {
   flex: 8;
   height: inherit;
   width: calc(100% - 355px);
-  background-color: white;
+  background-color: #f2f2f1;
   overflow-y: scroll;
 }
 
@@ -546,6 +559,7 @@ select {
 
   box-shadow: 1px 0px 5px #bbb;
   padding-right: 150px;
+  background-color: white;
 }
 .DashboardNav p {
   cursor: pointer;
@@ -636,7 +650,7 @@ select {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 50px;
 }
 
 .Products .item {
@@ -646,13 +660,14 @@ select {
 
   word-wrap: break-word;
   background-color: white;
+  border-radius: 15px;
 }
 
-.ProductCard {
+.Products .ProductCard {
   height: 100%;
   padding: 15px;
-  box-shadow: 2px 2px 5px #bbb;
-  border-radius: 25px;
+  border-radius: 15px;
+  background-color: white;
 }
 
 .ProductForm .form-close {
@@ -666,6 +681,7 @@ select {
 }
 .ProductCard .img {
   height: 70%;
+
   background-color: gray;
   text-align: center;
   position: relative;
@@ -676,8 +692,19 @@ select {
   height: 100%;
   width: 100%;
 }
+.Products .ProductCard:hover {
+  box-shadow: 2px 2px 15px #e9e9e9;
+}
+.Products .ProductCard .img img {
+  height: 100%;
+  width: 100%;
+}
+.Products .ProductCard .img:hover {
+  opacity: 0.8 !important;
+  filter: alpha(opacity=70) !important;
+}
 .Product .slides {
-  height: 700px;
+  height: 450px;
   width: 45vw;
   position: relative;
   margin: 25px auto;
@@ -688,11 +715,11 @@ select {
   transition: scroll 0.3s ease-in-out;
   border-radius: 25px;
 }
-.currentSlide {
+.Product .currentSlide {
   width: inherit;
-  height: 700px;
+  height: 450px;
 }
-.slides img {
+.Product .slides img {
   width: inherit;
   height: 100%;
   border-radius: 25px;
@@ -769,11 +796,11 @@ select {
 }
 
 .MarketPlace .ProductCard {
-  height: 400px;
-  width: 250px;
+  height: 250px;
+  width: 200px;
   border-radius: 25px;
-  box-shadow: 2px 2px 5px #bbb;
-  border-radius: 25px;
+  box-shadow: 2px 2px 5px #dadada;
+  padding: 15px;
 }
 
 .ProductCard button {
@@ -787,19 +814,25 @@ select {
 }
 
 .MarketPlace .ProductCard .img {
-  height: 70%;
+  height: 55%;
   text-align: center;
   position: relative;
   cursor: pointer;
   border-radius: 25px;
+  border: none;
+  outline: none;
 }
-
+.MarketPlace .ProductCard:hover {
+  box-shadow: 2px 2px 3px #dddddd;
+}
 .MarketPlace .ProductCard .img img {
   height: 100%;
   width: 100%;
-  border-radius: 25px;
 }
-
+.MarketPlace .ProductCard .img:hover {
+  opacity: 0.8 !important;
+  filter: alpha(opacity=70) !important;
+}
 .Add-div {
   height: 100%;
   display: flex;
@@ -836,34 +869,8 @@ select {
   justify-content: end;
 }
 
-.Item .product-gallery {
-  height: 70%;
-  border-radius: 2px;
-}
-
-.Item .slides {
-  flex: 1;
-  height: 100%;
-  width: 45vw;
-  margin: 0px auto;
-  position: relative;
-  display: flex;
-  border-radius: 2px;
-
-  /* Add the following lines for smooth scrolling */
-  scroll-behavior: smooth;
-  transition: scroll 0.3s ease-in-out;
-}
-.currentSlide {
-  width: inherit;
-}
-.slides img {
-  width: inherit;
-  height: 100%;
-  border-radius: 2px;
-}
 .Item {
-  height: 100%;
+  height: 900px;
 }
 .Item .back {
   font-size: 1.4rem;
@@ -878,17 +885,49 @@ select {
 }
 .Item .product-content {
   height: 75%;
+  width: 1200px;
+  margin: 0px auto;
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 0px 250px;
+  gap: 100px;
+  padding: 0px 0px;
+}
+
+.Item .product-gallery {
+  flex: 1;
+  width: 600px;
+  height: 80%;
+  border-radius: 2px;
+}
+
+.Item .slides {
+  width: 600px;
+  height: 100%;
+
+  flex: 1;
+  position: relative;
+  display: flex;
+  border-radius: 2px;
+
+  /* Add the following lines for smooth scrolling */
+  scroll-behavior: smooth;
+  transition: scroll 0.3s ease-in-out;
+}
+
+.Item .currentSlide {
+}
+.Item .slides img {
+  width: 600px;
+  height: 100%;
+
+  border-radius: 2px;
 }
 .Item .product-info {
   height: 60%;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .Item .product-info button {
@@ -902,10 +941,21 @@ select {
 .Item .product-info button:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
-.Item .product-info h4 {
+.Item .product-info .price {
   margin: 0;
   padding: 0;
   font-size: 1.3rem;
+}
+.Item .product-info .name {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+}
+.Item .product-info .category {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  text-transform: uppercase;
 }
 .Item .product-info p {
   margin: 0;
@@ -913,8 +963,8 @@ select {
 
   color: #36363a;
 }
-.Item .product-info .text {
-  font-size: 1.5rem;
+.Item .product-info .description {
+  font-size: 1.2rem;
 }
 .UserProfile {
   flex: 85%;
@@ -982,17 +1032,24 @@ select {
 
 .ProductForm .form-div {
   margin: 25px 0px;
+  height: calc(100% - 50px);
+  width: 50%;
   background-color: white;
+  overflow-y: auto;
+}
+.ProductForm .form-title-close {
+  padding: 10px 25px;
 }
 .ProductForm .form-div .form {
   margin: 0 auto 0 auto;
   padding: 25px;
-  width: 600px;
+  width: calc(100% - 50px);
   height: auto;
   overflow: hidden;
 }
 
-.ProductForm .form input {
+.ProductForm .form input,
+select {
   margin: 0px 0px;
   padding: 5px 0px;
   outline: none;
@@ -1026,7 +1083,7 @@ select {
   justify-content: space-between;
   gap: 5px;
   padding: 0px;
-  margin: 5px 0px;
+  margin: 15px 0px;
 }
 
 .delete-update {
@@ -1044,11 +1101,21 @@ select {
 .delete-update button:hover {
   background-color: #36363a;
 }
-
+.Product {
+  padding: 30px 0px;
+}
 .Product .icon {
-  margin: 15px;
+  margin: 15px 100px;
   font-size: 2rem;
   cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+}
+.Product .icon:hover {
+  background-color: rgba(185, 185, 185, 0.3);
+}
+.Product .product-name {
+  font-size: 1.6rem;
 }
 
 .Product .product-info {
@@ -1059,7 +1126,8 @@ select {
   gap: 50px;
 }
 
-.Product .description {
+.Product .descr {
+  margin: 50px 0px 150px 0px;
 }
 
 /* .update-form {
@@ -1170,15 +1238,17 @@ select {
   overflow-x: auto;
   margin: 25px 50px;
   display: flex;
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 25px;
 }
 .update.tag {
+  width: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  gap: 0px;
   background-color: rgba(133, 133, 133, 0.123);
-  padding: 5px 25px;
+  padding: 5px;
   border-radius: 15px;
 }
 
@@ -1189,16 +1259,28 @@ select {
 }
 .update.tag div .icon {
   font-size: 1.3rem;
+  margin: 0px;
 }
 .add-tag-btn {
-  width: 25%;
+  width: 40%;
+  padding: 5px;
   background-color: #36363a;
   color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
 }
 
 .Product .back {
   font-size: 1.6rem;
   cursor: pointer;
+  margin: 5px 100px;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 50%;
+}
+.Product .back:hover {
+  background-color: rgba(185, 185, 185, 0.3);
 }
 
 .Success {
@@ -1233,11 +1315,12 @@ select {
 }
 
 .OrderCard {
-  height: 400px;
+  height: 300px;
   width: 250px;
   padding: 15px;
   box-shadow: 2px 2px 5px #bbb;
   border-radius: 25px;
+  background-color: white;
 }
 
 .OrderCard .product-info p {
@@ -1245,7 +1328,7 @@ select {
   padding: 0px;
 }
 .OrderCard .img {
-  height: 70%;
+  height: 60%;
   background-color: gray;
   text-align: center;
   position: relative;
@@ -1256,10 +1339,14 @@ select {
   height: 100%;
   width: 100%;
 }
-
+.Reviews {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .AddReview {
   width: 20%;
-  margin: 5px;
+  margin: 5px 0px 0px auto;
 }
 
 .ReviewForm {
@@ -1306,17 +1393,19 @@ select {
 }
 
 .reviews-div {
+  min-height: 100%;
   margin: 5px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
   gap: 25px;
+  padding: 15px 0px;
 }
 
 .ReviewCard {
-  flex: 1;
   width: 50%;
+  height: 15%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -1324,6 +1413,7 @@ select {
   box-shadow: 1px 1px 5px #bbb;
   border-radius: 25px;
   text-align: center;
+  background-color: white;
 }
 .ReviewCard div {
   flex: 1;
@@ -1333,4 +1423,99 @@ select {
 .ReviewCard .review-text {
   display: flex;
   justify-content: space-evenly;
+}
+
+@media screen and (min-width: 1287px) and (max-width: 1440px) {
+}
+@media screen and (min-width: 1025px) and (max-width: 1286px) {
+}
+@media screen and (max-width: 1024px) {
+  .add-tag-btn {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .HomePage {
+    flex-direction: column;
+  }
+  .Sidebar {
+    width: 100%;
+  }
+  .sidebar-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .sidebar-links div {
+    cursor: pointer;
+    margin: 0px 5px;
+    padding: 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Main {
+    width: 100%;
+  }
+
+  .DashboardNav {
+    gap: 45px;
+
+    padding-right: 0px;
+  }
+  .Reviews {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .AddReview {
+    width: 45%;
+    margin: 5px 0px 0px auto;
+  }
+
+  .reviews-div {
+    margin: 5px 5px;
+    background-color: #f2f2f1;
+  }
+
+  .ReviewCard {
+    width: 90%;
+    height: 15%;
+
+    gap: 15px;
+  }
+  .ReviewCard div {
+    flex: 1;
+    text-align: start;
+    padding-left: 15px;
+  }
+  .ProductForm .form-div {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .sidebar-links div {
+    cursor: pointer;
+    margin: 0px 5px;
+    padding: 0px 0px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+  }
+  .ReviewCard {
+    width: 90%;
+    height: 25%;
+
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 425px) {
+}
+@media screen and (max-width: 375px) {
+  .sidebar-links div {
+    font-size: 0.8rem;
+  }
 }

@@ -333,7 +333,7 @@ function Product() {
               </div>
             </div>
             <div className="product-info">
-              <div>{product && product.name}</div>
+              <div className="product-name">{product && product.name}</div>
               <div>Tags: </div>
               <div className="update tags">
                 {obj.tags.length > 0 &&
@@ -344,9 +344,7 @@ function Product() {
                   ))}
               </div>
               <div>R{product && product.price}</div>
-              <div className="description">
-                {product && product.description}
-              </div>
+              <div className="descr">{product && product.description}</div>
             </div>
           </div>
         )}

@@ -91,10 +91,7 @@ function Registration() {
                 {err}
               </span>
             ))}
-          <div className="register-to-login">
-            Already have an account?
-            <p onClick={goToLogin}>Login</p>
-          </div>
+
           <div className="form">
             <div className="username">
               <label htmlFor="username">
@@ -191,6 +188,10 @@ function Registration() {
             <button onClick={loading ? console.log() : handleSubmit}>
               {loading ? "Loading..." : "Submit"}
             </button>
+          </div>
+          <div className="register-to-login">
+            Already have an account?
+            <p onClick={goToLogin}>Login</p>
           </div>
         </div>
         <div className="register-img">

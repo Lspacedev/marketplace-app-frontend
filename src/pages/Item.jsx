@@ -133,7 +133,6 @@ function Item() {
         }
       );
       if (res.ok === true) {
-        console.log(res);
         //navigation(0);
       }
     } catch (error) {

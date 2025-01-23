@@ -27,7 +27,6 @@ function Reviews() {
         }
       );
       const data = await response.json();
-      console.log({ data });
       if (response.ok === true) {
         dispatch(setReviews(data.reviews));
       }

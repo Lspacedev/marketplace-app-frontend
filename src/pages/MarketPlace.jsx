@@ -98,7 +98,6 @@ function MarketPlace() {
         },
         body: JSON.stringify({ productId: id }),
       });
-      console.log(res);
       if (res.ok === true) {
         navigation(0);
       }
@@ -120,7 +119,6 @@ function MarketPlace() {
         }
       );
       if (res.ok === true) {
-        console.log(res);
         navigation(0);
       }
     } catch (error) {

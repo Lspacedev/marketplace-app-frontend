@@ -6,7 +6,6 @@ function ProductCard({
   product,
   cart,
 }) {
-  console.log(cart);
   const [isAdded, setIsAdded] = useState(false);
   useEffect(() => {
     if (cart && cart.filter((item) => item === product._id).length > 0) {

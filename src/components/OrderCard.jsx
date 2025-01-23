@@ -11,7 +11,6 @@ function OrderCard({ order }) {
   const token = localStorage.getItem("token");
 
   async function fetchProduct() {
-    console.log({ order });
     try {
       const response = await fetch(
         `${import.meta.env.VITE_PROD_URL}/api/public/products/${
@@ -26,7 +25,6 @@ function OrderCard({ order }) {
         }
       );
       const data = await response.json();
-      console.log(data);
       if (response.ok === true) {
         setProduct(data);
         setLoading(false);

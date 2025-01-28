@@ -13,7 +13,21 @@ button {
 .App {
   height: 100vh;
 }
+.Welcome {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
+  height: calc(100% - 70px);
+}
+.Welcome .title {
+  font-size: 2rem;
+  margin-top: 50px;
+  text-align: center;
+}
+.Welcome .text {
+  text-align: center;
+}
 .Landing {
   height: 100%;
   overflow-y: auto;
@@ -1062,7 +1076,6 @@ select {
   margin: 25px 0px;
   height: calc(100% - 50px);
   width: 50%;
-  background-color: white;
   overflow-y: auto;
 }
 .ProductForm .form-title-close {
@@ -1074,6 +1087,7 @@ select {
   width: calc(100% - 50px);
   height: auto;
   overflow: hidden;
+  background-color: white;
 }
 
 .ProductForm .form input,
@@ -1433,7 +1447,7 @@ select {
 
 .ReviewCard {
   width: calc(70% - 60px);
-  height: 15%;
+  height: 20%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -1701,5 +1715,8 @@ select {
 @media screen and (max-width: 375px) {
   .sidebar-links div {
     font-size: 0.8rem;
+  }
+  .ReviewCard {
+    height: 100%;
   }
 }

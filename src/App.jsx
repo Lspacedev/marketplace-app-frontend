@@ -18,6 +18,7 @@ import Cancel from "./pages/Cancel";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
 import Reviews from "./pages/Reviews";
+import Welcome from "./pages/Welcome";
 function App() {
   const dispatch = useDispatch();
 
@@ -66,7 +67,7 @@ function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route path="home" element={<HomePage />}>
-              <Route index element={<Orders />} />
+              <Route index element={<Welcome />} />
 
               <Route path="products" element={<Products />}>
                 <Route path=":product_id" element={<Product />} />

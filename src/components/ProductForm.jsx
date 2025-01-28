@@ -114,13 +114,13 @@ function ProductForm({ toggleClicked }) {
   return (
     <div className="ProductForm">
       <div className="form-div">
-        <div className="form-title-close">
-          <div className="form-close" onClick={handleFormClose}>
-            <IoCloseOutline className="icon" />
-          </div>
-          <h3>Enter Product Information</h3>
-        </div>
         <div className="form">
+          <div className="form-title-close">
+            <div className="form-close" onClick={handleFormClose}>
+              <IoCloseOutline className="icon" />
+            </div>
+            <h3>Enter Product Information</h3>
+          </div>
           <div className="name">
             <label htmlFor="product-name">
               Product Name

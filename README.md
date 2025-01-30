@@ -2,10 +2,12 @@
 
 React Marketplace App using MongoDb as database. A simple marketplace app that functions similar to Facebook marketplace, where users can add their own products and sell them to other users. Or they can simply buy products from other users.
 
-## Marketplace App | BACKEND
+### Marketplace App | Backend
 
 ```bash
-https://github.com/Lspacedev/marketplace-app-backend
+
+[click here](https://github.com/Lspacedev/marketplace-app-backend)
+
 ```
 
 ## Installation
@@ -22,7 +24,7 @@ git@github.com:Lspacedev/marketplace-app-frontend.git
 cd marketplace-app-frontend
 ```
 
-3.  Install all dependencies
+3.  Install All Dependencies
 
 ```bash
 npm install

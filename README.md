@@ -4,7 +4,7 @@ React Marketplace App using MongoDb as database. A simple marketplace app that f
 
 ### Marketplace App | Backend
 
-[click here](https://github.com/Lspacedev/marketplace-app-backend)
+[https://github.com/Lspacedev/marketplace-app-backend](https://github.com/Lspacedev/marketplace-app-backend)
 
 ## Installation
 

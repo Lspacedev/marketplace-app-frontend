@@ -121,10 +121,10 @@ function Login() {
               onClick={loading ? console.log() : guestSignIn}
             >
               {loading ? "Loading..." : "Guest"}
-            </button>{" "}
+            </button>
           </div>
           <div className="login-to-register">
-            Don't have an account?{" "}
+            Don't have an account?
             <p onClick={handleNavigateRegister}>Register here</p>
           </div>
         </div>

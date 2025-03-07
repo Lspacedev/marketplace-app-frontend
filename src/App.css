@@ -4,6 +4,7 @@
 body {
   margin: 0px;
   padding: 0px;
+  background-color: rgb(244, 244, 244);
 }
 
 button {
@@ -38,7 +39,7 @@ button {
   justify-content: space-around;
   align-items: center;
   gap: 400px;
-  padding: 15px 50px;
+  padding: 0px 50px;
   background-color: white;
 }
 .Nav .cart-icon {
@@ -70,9 +71,9 @@ button {
 
 .nav-links .register-btn {
   background-color: #141414;
-  padding: 10px 25px;
+  padding: 10px 15px;
   color: white;
-  border-radius: 25px;
+  border-radius: 7px;
   border: none;
 }
 
@@ -136,9 +137,8 @@ button {
 
   padding: 0px;
 
-  border-radius: 25px;
+  border-radius: 7px;
   z-index: 2;
-  box-shadow: 1px 1px 25px black;
 }
 
 .none {
@@ -157,9 +157,9 @@ button {
 }
 
 .SearchProducts input {
-  flex: 4;
-  padding: 5px 0px;
-  border-radius: 25px 0px 0px 25px;
+  flex: 6;
+  padding: 10px 15px;
+  border-radius: 7px 0px 0px 7px;
   border: none;
   outline: none;
   margin: 0px;
@@ -171,9 +171,9 @@ button {
 .SearchProducts .search-btn {
   flex: 1;
   height: 100%;
-  padding: 5px;
+  padding: 10px 0px;
   margin: 0px;
-  border-radius: 0px 25px 25px 0px;
+  border-radius: 0px 7px 7px 0px;
 
   display: flex;
   justify-content: center;
@@ -630,6 +630,10 @@ select {
   color: #141414;
   cursor: pointer;
 }
+.logo img {
+  width: 125px;
+  height: 25px;
+}
 .logo span {
   background-color: #141414;
   color: white;
@@ -828,9 +832,10 @@ select {
 .MarketPlace .ProductCard {
   height: 250px;
   width: 200px;
-  border-radius: 25px;
+  border-radius: 7px;
   box-shadow: 2px 2px 5px #dadada;
-  padding: 15px;
+  padding: 25px;
+  background-color: white;
 }
 
 .ProductCard button {
@@ -838,6 +843,7 @@ select {
   color: white;
   border: none;
   outline: none;
+  border-radius: 5px;
 }
 .ProductCard button:hover {
   background-color: rgba(0, 0, 0, 0.7);
